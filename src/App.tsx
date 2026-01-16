@@ -39,7 +39,7 @@ const App: React.FC = () => {
               <RSVPForm />
             </section>
 
-            <section id="music" className="scroll-mt-20 bg-amber-600" style={{ contentVisibility: 'auto' }}>
+            <section id="music" className="scroll-mt-20 bg-wedding-500" style={{ contentVisibility: 'auto' }}>
               <MusicRequest />
             </section>
 

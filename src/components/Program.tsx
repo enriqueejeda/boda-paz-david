@@ -152,7 +152,7 @@ export const Program: React.FC = () => {
 
             {/* Contenido (Encima de la imagen) */}
             <div className="relative z-10 animate-fade-in">
-              <div className="inline-block px-4 py-1 mb-4 border border-white/40 rounded-full backdrop-blur-sm bg-white/30">
+              <div className="inline-block px-4 py-1 mb-4 border border-white/50 rounded-full backdrop-blur-sm bg-black/40">
                 <h3 className="font-bold uppercase tracking-[0.2em] text-xs md:text-sm text-white">
                   📅 {currentDay.fullDate}
                 </h3>

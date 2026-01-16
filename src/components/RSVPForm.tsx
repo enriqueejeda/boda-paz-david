@@ -226,7 +226,7 @@ export const RSVPForm: React.FC = () => {
           >
             {currentStep > s.id ? <CheckCircle size={16} /> : s.id}
           </div>
-          <span className={`text-xs mt-2 font-medium uppercase tracking-wider transition-colors ${currentStep >= s.id ? 'text-wedding-600' : 'text-gray-300'}`}>
+          <span className={`text-xs mt-2 font-medium uppercase tracking-wider transition-colors ${currentStep >= s.id ? 'text-wedding-700' : 'text-gray-400'}`}>
             {s.title}
           </span>
           {/* Línea conectora */}

@@ -46,15 +46,15 @@ export const MusicRequest: React.FC = () => {
         {/* Steps Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
           {steps.map((step) => (
-            <div key={step.id} className="bg-white/25 backdrop-blur-md rounded-2xl p-6 border border-white/40 flex flex-col items-center text-center relative group hover:bg-white/35 transition-colors duration-300">
+            <div key={step.id} className="bg-black/30 backdrop-blur-md rounded-2xl p-6 border border-white/50 flex flex-col items-center text-center relative group hover:bg-black/40 transition-colors duration-300">
               <div className="absolute -top-4 -left-4 w-10 h-10 bg-white text-wedding-500 font-bold rounded-full flex items-center justify-center shadow-lg border-2 border-white z-20">
                 {step.id}
               </div>
               <div className="mb-4 p-4 bg-white/30 rounded-full text-white group-hover:scale-110 transition-transform duration-300">
                 <step.icon size={32} />
               </div>
-              <h3 className="text-xl font-bold mb-2 text-white">{step.title}</h3>
-              <p className="text-white/95 text-sm leading-relaxed">{step.description}</p>
+              <h3 className="text-xl font-bold mb-2 text-white drop-shadow-md">{step.title}</h3>
+              <p className="text-white text-sm leading-relaxed drop-shadow-sm">{step.description}</p>
             </div>
           ))}
         </div>
