@@ -24,26 +24,26 @@ const App: React.FC = () => {
 
       <main className="grow">
         {/* FASE 1: INTRO INMERSIVA - Optimizada para LCP */}
-        <section id="home" style={{ contentVisibility: 'auto', minHeight: '100vh' }}>
+        <section id="home" style={{ contentVisibility: 'auto' }}>
           <Hero />
         </section>
 
         {/* FASE 2: CONTENIDO FUNCIONAL (Aparece tras el scroll de la intro) */}
-        <div className="relative z-10 bg-white shadow-[0_-20px_40px_rgba(0,0,0,0.1)] rounded-t-3xl transform -translate-y-20 pt-20" style={{ contain: 'layout style paint', willChange: 'auto' }}>
+        <div className="relative z-10 bg-white shadow-[0_-20px_40px_rgba(0,0,0,0.1)] -mt-20 pt-20 rounded-t-3xl">
           <Suspense fallback={<LoadingSpinner />}>
-            <section id="program" className="scroll-mt-20" style={{ contentVisibility: 'auto' }}>
+            <section id="program" className="scroll-mt-20">
               <Program />
             </section>
 
-            <section id="rsvp" className="scroll-mt-20" style={{ contentVisibility: 'auto' }}>
+            <section id="rsvp" className="scroll-mt-20">
               <RSVPForm />
             </section>
 
-            <section id="music" className="scroll-mt-20 bg-wedding-500" style={{ contentVisibility: 'auto' }}>
+            <section id="music" className="scroll-mt-20 bg-amber-600">
               <MusicRequest />
             </section>
 
-            <section id="logistics" className="scroll-mt-20" style={{ contentVisibility: 'auto' }}>
+            <section id="logistics" className="scroll-mt-20">
               <FAQ />
             </section>
           </Suspense>

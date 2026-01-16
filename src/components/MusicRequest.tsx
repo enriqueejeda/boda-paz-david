@@ -27,18 +27,18 @@ export const MusicRequest: React.FC = () => {
   ];
 
   return (
-    <div className="py-20 bg-wedding-500 text-white overflow-hidden relative">
+    <div className="py-20 text-white bg-white overflow-hidden relative">
       {/* Decorative background elements */}
-      <div className="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-wedding-400/30 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-72 h-72 bg-white/20 rounded-full blur-3xl"></div>
+      <div className="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-emerald-400 blur-3xl"></div>
+      <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-72 h-72 bg-emerald-400 blur-3xl"></div>
 
       <div className="container mx-auto px-6 max-w-5xl relative z-10">
         <div className="text-center mb-12">
-          <div className="inline-flex items-center justify-center p-3 bg-white/30 rounded-full mb-6 text-white shadow-lg">
+          <div className="inline-flex items-center justify-center p-3 bg-emerald-400 rounded-full mb-6 text-white shadow-lg">
             <Music size={32} />
           </div>
-          <h2 className="text-4xl md:text-5xl font-serif mb-4 font-bold">La Banda Sonora</h2>
-          <p className="text-lg text-white/90 max-w-2xl mx-auto leading-relaxed">
+          <h2 className="text-4xl md:text-5xl font-serif mb-4 font-bold text-emerald-700">La Banda Sonora</h2>
+          <p className="text-lg text-emerald-600 max-w-2xl mx-auto leading-relaxed">
             Queremos que la fiesta sea vuestra tanto como nuestra. Sigue estos 3 sencillos pasos para colaborar:
           </p>
         </div>
@@ -46,8 +46,9 @@ export const MusicRequest: React.FC = () => {
         {/* Steps Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
           {steps.map((step) => (
-            <div key={step.id} className="bg-black/30 backdrop-blur-md rounded-2xl p-6 border border-white/50 flex flex-col items-center text-center relative group hover:bg-black/40 transition-colors duration-300">
-              <div className="absolute -top-4 -left-4 w-10 h-10 bg-white text-wedding-500 font-bold rounded-full flex items-center justify-center shadow-lg border-2 border-white z-20">
+            <div key={step.id} className="bg-emerald-400 backdrop-blur-md rounded-2xl p-6 border border-white/20
+             flex flex-col items-center text-center relative group hover:bg-amber-500 transition-colors duration-300">
+              <div className="absolute -top-4 -left-4 w-10 h-10 bg-white text-wedding-500 font-bold rounded-full flex items-center justify-center shadow-lg border-2 text-black border-emerald-500 z-20">
                 {step.id}
               </div>
               <div className="mb-4 p-4 bg-white/30 rounded-full text-white group-hover:scale-110 transition-transform duration-300">
@@ -63,7 +64,7 @@ export const MusicRequest: React.FC = () => {
         <div className="flex flex-col items-center gap-4">
           <div className="relative">
             {/* Animación Ping (Onda expansiva) */}
-            <span className="absolute inset-0 rounded-full bg-white/30 animate-ping"></span>
+            <span className="absolute inset-0 rounded-full bg-emerald-500 animate-ping"></span>
 
             <a
               href={SPOTIFY_JAM_URL}
@@ -84,5 +85,6 @@ export const MusicRequest: React.FC = () => {
 
       </div>
     </div>
+
   );
 };
