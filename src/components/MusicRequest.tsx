@@ -36,7 +36,7 @@ export const MusicRequest: React.FC = () => {
             <Music size={32} />
           </div>
           <h2 className="text-4xl md:text-5xl font-serif mb-4 font-bold text-emerald-700">La Banda Sonora</h2>
-          <p className="text-lg text-emerald-600 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-lg text-emerald-700 max-w-2xl mx-auto leading-relaxed">
             Queremos que la fiesta sea vuestra tanto como nuestra. Sigue estos 3 sencillos pasos para colaborar:
           </p>
         </div>
@@ -44,7 +44,7 @@ export const MusicRequest: React.FC = () => {
         {/* Steps Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
           {steps.map((step) => (
-            <div key={step.id} className="bg-emerald-400 backdrop-blur-md rounded-2xl p-6 border border-white/20
+            <div key={step.id} className="bg-emerald-600 backdrop-blur-md rounded-2xl p-6 border border-white/20
              flex flex-col items-center text-center relative group hover:bg-amber-500 transition-colors duration-300">
               <div className="absolute -top-4 -left-4 w-10 h-10 bg-white text-wedding-500 font-bold rounded-full flex items-center justify-center shadow-lg border-2 text-black border-emerald-500 z-20">
                 {step.id}
@@ -61,8 +61,8 @@ export const MusicRequest: React.FC = () => {
         {/* Action Button with Pulse Effect */}
         <div className="flex flex-col items-center gap-4">
           <div className="relative">
-            {/* Animación Ping (Onda expansiva) */}
-            <span className="absolute inset-0 rounded-full bg-emerald-500 animate-ping"></span>
+            {/* Animación Ping (Onda expansiva)*/}
+            <span className="absolute hidden md:inline-flex w-full h-full rounded-full bg-emerald-700 opacity-75 animate-ping" style={{ animationDuration: '1.5s' }}></span>
 
             <a
               href={SPOTIFY_JAM_URL}
@@ -76,7 +76,7 @@ export const MusicRequest: React.FC = () => {
             </a>
           </div>
 
-          <p className="text-xs text-black/50">
+          <p className="text-xs text-black mt-4 max-w-sm text-center">
             *Requiere tener la App de Spotify instalada.
           </p>
         </div>
