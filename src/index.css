@@ -4,6 +4,7 @@
 #home {
     content-visibility: auto;
     contain-intrinsic-size: auto 100vh;
+    min-height: 100vh;
 }
 
 /* Optimizar renderizado de imágenes hero */
@@ -11,6 +12,19 @@
     content-visibility: auto;
     will-change: transform;
     contain: paint layout style;
+}
+
+/* Prevenir CLS en el contenedor principal */
+main {
+    isolation: isolate;
+}
+
+/* Reservar espacio para la sección de contenido */
+#program,
+#rsvp,
+#music,
+#logistics {
+    contain-intrinsic-size: auto 500px;
 }
 
 /* Precargar animation frames para el scroll inicial */
