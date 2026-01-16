@@ -1,0 +1,21 @@
+@import 'tailwindcss';
+
+/* Optimización del LCP - Hero Section */
+#home {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 100vh;
+}
+
+/* Optimizar renderizado de imágenes hero */
+#home img {
+    content-visibility: auto;
+    will-change: transform;
+    contain: paint layout style;
+}
+
+/* Precargar animation frames para el scroll inicial */
+@media (prefers-reduced-motion: no-preference) {
+    * {
+        scroll-behavior: smooth;
+    }
+}
