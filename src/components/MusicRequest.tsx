@@ -29,8 +29,6 @@ export const MusicRequest: React.FC = () => {
   return (
     <div className="py-20 text-white bg-white overflow-hidden relative">
       {/* Decorative background elements */}
-      <div className="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-emerald-400 blur-3xl"></div>
-      <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-72 h-72 bg-emerald-400 blur-3xl"></div>
 
       <div className="container mx-auto px-6 max-w-5xl relative z-10">
         <div className="text-center mb-12">
@@ -78,7 +76,7 @@ export const MusicRequest: React.FC = () => {
             </a>
           </div>
 
-          <p className="text-xs text-white/50">
+          <p className="text-xs text-black/50">
             *Requiere tener la App de Spotify instalada.
           </p>
         </div>
