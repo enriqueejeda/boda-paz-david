@@ -12,6 +12,10 @@ dist
 dist-ssr
 *.local
 
+# Performance analysis files
+analyze-performance.sh
+PERFORMANCE_GUIDE.md
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
