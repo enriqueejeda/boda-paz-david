@@ -221,12 +221,12 @@ export const RSVPForm: React.FC = () => {
           <div
             className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold border-2 transition-all duration-500 ${currentStep >= s.id
               ? 'bg-wedding-500 border-wedding-500 text-white shadow-lg scale-110'
-              : 'bg-white border-gray-200 text-gray-300'
+              : 'bg-white border-gray-300 text-gray-600'
               }`}
           >
             {currentStep > s.id ? <CheckCircle size={16} /> : s.id}
           </div>
-          <span className={`text-xs mt-2 font-medium uppercase tracking-wider transition-colors ${currentStep >= s.id ? 'text-wedding-700' : 'text-gray-400'}`}>
+          <span className={`text-xs mt-2 font-medium uppercase tracking-wider transition-colors ${currentStep >= s.id ? 'text-wedding-700' : 'text-gray-600'}`}>
             {s.title}
           </span>
           {/* Línea conectora */}
@@ -410,7 +410,7 @@ export const RSVPForm: React.FC = () => {
                 <div className="pt-4 border-t border-gray-100 text-center">
                   <button
                     onClick={setNotAttending}
-                    className="text-gray-400 text-sm hover:text-red-500 transition-colors flex items-center justify-center gap-2 mx-auto"
+                    className="text-gray-600 text-sm hover:text-red-500 transition-colors flex items-center justify-center gap-2 mx-auto"
                   >
                     <X size={14} /> Lamentablemente, no podré asistir a nada
                   </button>
