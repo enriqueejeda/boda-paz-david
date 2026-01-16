@@ -7,6 +7,8 @@ interface LazyImageProps {
     width?: number;
     height?: number;
     priority?: boolean;
+    srcSet?: string;
+    sizes?: string;
 }
 
 /**
@@ -14,6 +16,7 @@ interface LazyImageProps {
  * - Lazy loading por defecto
  * - Decoding asincrónico
  * - Soporte para imágenes críticas con priority
+ * - Responsive images con srcSet y sizes
  */
 export const LazyImage: React.FC<LazyImageProps> = ({
     src,
@@ -21,7 +24,9 @@ export const LazyImage: React.FC<LazyImageProps> = ({
     className = '',
     width,
     height,
-    priority = false
+    priority = false,
+    srcSet,
+    sizes
 }) => {
     return (
         <img
@@ -33,6 +38,9 @@ export const LazyImage: React.FC<LazyImageProps> = ({
             loading={priority ? 'eager' : 'lazy'}
             decoding="async"
             fetchPriority={priority ? 'high' : 'low'}
+            srcSet={srcSet}
+            sizes={sizes}
+            style={{ contentVisibility: 'auto' }}
         />
     );
 };

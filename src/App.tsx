@@ -29,21 +29,21 @@ const App: React.FC = () => {
         </section>
 
         {/* FASE 2: CONTENIDO FUNCIONAL (Aparece tras el scroll de la intro) */}
-        <div className="relative z-10 bg-white shadow-[0_-20px_40px_rgba(0,0,0,0.1)] -mt-20 pt-20 rounded-t-3xl">
+        <div className="relative z-10 bg-white shadow-[0_-20px_40px_rgba(0,0,0,0.1)] -mt-20 pt-20 rounded-t-3xl" style={{ contain: 'layout style paint' }}>
           <Suspense fallback={<LoadingSpinner />}>
-            <section id="program" className="scroll-mt-20">
+            <section id="program" className="scroll-mt-20" style={{ contentVisibility: 'auto' }}>
               <Program />
             </section>
 
-            <section id="rsvp" className="scroll-mt-20">
+            <section id="rsvp" className="scroll-mt-20" style={{ contentVisibility: 'auto' }}>
               <RSVPForm />
             </section>
 
-            <section id="music" className="scroll-mt-20 bg-amber-600">
+            <section id="music" className="scroll-mt-20 bg-amber-600" style={{ contentVisibility: 'auto' }}>
               <MusicRequest />
             </section>
 
-            <section id="logistics" className="scroll-mt-20">
+            <section id="logistics" className="scroll-mt-20" style={{ contentVisibility: 'auto' }}>
               <FAQ />
             </section>
           </Suspense>

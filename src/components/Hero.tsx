@@ -81,12 +81,29 @@ const BackgroundLayer: React.FC<{
     index === 0 ? [0, range[1] - 0.05, range[1]] : [range[0] - 0.05, range[0], range[1] - 0.05, range[1]],
     index === 0 ? [1, 1, 0] : [0, 1, 1, 0]
   );
-  const scale = useTransform(scrollYProgress, range, [1, 1.15]);
+  const scale = useTransform(scrollYProgress, range, [1, 1.05]);
 
   return (
-    <motion.div style={{ opacity, zIndex: index }} className="absolute inset-0 w-full h-full pointer-events-none">
-      <motion.div style={{ scale }} className="w-full h-full bg-emerald-950">
-        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${img})` }}></div>
+    <motion.div
+      style={{ opacity, zIndex: index }}
+      className="absolute inset-0 w-full h-full pointer-events-none will-change-transform"
+    >
+      <motion.div
+        style={{ scale }}
+        className="w-full h-full bg-emerald-950 will-change-transform"
+        initial={false}
+      >
+        <img
+          src={img}
+          alt="Background"
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{
+            contentVisibility: 'auto',
+            backfaceVisibility: 'hidden'
+          }}
+          loading={index === 0 ? 'eager' : 'lazy'}
+          decoding="async"
+        />
         <div className="absolute inset-0 bg-black/50"></div>
       </motion.div>
     </motion.div>
@@ -104,12 +121,12 @@ const TextLayer: React.FC<{
     index === 0 ? [0, range[1] - 0.1, range[1]] : [range[0], range[0] + 0.08, range[1] - 0.08, range[1]],
     index === 0 ? [1, 1, 0] : [0, 1, 1, 0]
   );
-  const y = useTransform(scrollYProgress, range, [30, -30]);
+  const y = useTransform(scrollYProgress, range, [20, -20]);
 
   return (
     <motion.div
       style={{ opacity, y, pointerEvents: 'none' }}
-      className="absolute inset-0 w-full h-full flex flex-col items-center justify-center text-center px-4 md:px-6 z-20"
+      className="absolute inset-0 w-full h-full flex flex-col items-center justify-center text-center px-4 md:px-6 z-20 will-change-transform"
     >
       <div className="max-w-5xl">{children}</div>
     </motion.div>
@@ -124,7 +141,7 @@ export const Hero: React.FC = () => {
   });
 
   return (
-    <div ref={containerRef} className="relative h-[800vh] w-full">
+    <div ref={containerRef} className="relative h-[600vh] w-full">
       <div className="sticky top-0 h-screen w-full overflow-hidden">
         {SCENES.map((scene, i) => {
           const step = 1 / SCENES.length;

@@ -7,12 +7,38 @@
   <title>Boda Paz & David</title>
 
   <!-- Preload crítico para imagen hero (LCP) -->
-  <link rel="preload" as="image" href="/src/assets/images/David_Paz_hero.webp" type="image/webp" fetchpriority="high">
+  <link rel="preload" as="image" href="/src/assets/images/David_Paz_hero.webp" type="image/webp" fetchpriority="high"
+    imagesrcset="
+    /src/assets/images/David_Paz_hero.webp 1x,
+    /src/assets/images/David_Paz_hero.webp 2x
+  ">
 
   <!-- DNS Prefetch para recursos externos -->
   <link rel="dns-prefetch" href="https://fonts.googleapis.com">
 
+  <!-- Preconnect para Google Fonts si los usas -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
   <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+
+  <!-- Optimizaciones CSS críticas -->
+  <style>
+    /* Evita CLS minimizando fuente no disponible */
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 0;
+    }
+
+    body {
+      overflow-x: hidden;
+    }
+
+    /* Contención de layout para elementos animados */
+    .sticky {
+      contain: layout style paint;
+    }
+  </style>
 </head>
 
 <body>
