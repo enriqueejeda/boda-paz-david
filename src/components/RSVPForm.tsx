@@ -424,9 +424,9 @@ export const RSVPForm: React.FC = () => {
 
                 {/* Contadores */}
                 <div>
-                  <h4 className="text-emerald-900 font-bold text-lg mb-6 flex items-center gap-2">
+                  <h3 className="text-emerald-900 font-bold text-lg mb-6 flex items-center gap-2">
                     <Users size={20} className="text-wedding-500" /> ¿Cuántos venís?
-                  </h4>
+                  </h3>
                   <div className="flex items-center justify-between p-4 bg-gray-50 rounded-xl mb-4">
                     <div>
                       <span className="block font-bold text-gray-800">Adultos</span>
@@ -475,9 +475,9 @@ export const RSVPForm: React.FC = () => {
                 {/* Nombres de Acompañantes (DINÁMICO) */}
                 {companionsNeeded > 0 && (
                   <div className="animate-fade-in bg-wedding-50/50 p-4 rounded-xl border border-wedding-100">
-                    <h4 className="text-emerald-900 font-bold text-sm mb-4 flex items-center gap-2 uppercase tracking-wide">
+                    <h3 className="text-emerald-900 font-bold text-sm mb-4 flex items-center gap-2 uppercase tracking-wide">
                       <UserPlus size={16} className="text-wedding-500" /> Nombres de acompañantes
-                    </h4>
+                    </h3>
                     <div className="space-y-3">
                       {formData.additionalGuests.map((name, index) => (
                         <div key={index}>
@@ -497,9 +497,9 @@ export const RSVPForm: React.FC = () => {
 
                 {/* Alergias */}
                 <div>
-                  <h4 className="text-emerald-900 font-bold text-lg mb-4 flex items-center gap-2">
+                  <h3 className="text-emerald-900 font-bold text-lg mb-4 flex items-center gap-2">
                     <AlertCircle size={20} className="text-wedding-500" /> Alergias o Dietas
-                  </h4>
+                  </h3>
                   <textarea
                     value={formData.dietaryRestrictions}
                     onChange={(e) => updateField('dietaryRestrictions', e.target.value)}
@@ -571,12 +571,12 @@ export const RSVPForm: React.FC = () => {
           </div>
 
           {/* Footer del Formulario (Botones) */}
-          <div className="p-6 bg-gray-50 border-t border-gray-100 flex justify-between items-center">
+          <div className="p-6 bg-white border-t border-gray-200 flex justify-between items-center">
 
             {currentStep > 1 ? (
               <button
                 onClick={prevStep}
-                className="text-gray-500 font-semibold hover:text-emerald-900 px-4 py-2 rounded-lg hover:bg-gray-100 transition-colors flex items-center gap-1"
+                className="text-emerald-700 font-semibold hover:text-emerald-900 px-4 py-2 rounded-lg hover:bg-gray-50 transition-colors flex items-center gap-1"
               >
                 <ChevronLeft size={18} /> Atrás
               </button>

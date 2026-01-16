@@ -34,7 +34,7 @@ export const MusicRequest: React.FC = () => {
 
       <div className="container mx-auto px-6 max-w-5xl relative z-10">
         <div className="text-center mb-12">
-          <div className="inline-flex items-center justify-center p-3 bg-white/10 rounded-full mb-6 text-white shadow-lg">
+          <div className="inline-flex items-center justify-center p-3 bg-white/30 rounded-full mb-6 text-white shadow-lg">
             <Music size={32} />
           </div>
           <h2 className="text-4xl md:text-5xl font-serif mb-4 font-bold">La Banda Sonora</h2>
@@ -46,15 +46,15 @@ export const MusicRequest: React.FC = () => {
         {/* Steps Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
           {steps.map((step) => (
-            <div key={step.id} className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 flex flex-col items-center text-center relative group hover:bg-white/20 transition-colors duration-300">
-              <div className="absolute -top-4 -left-4 w-10 h-10 bg-white text-black font-bold rounded-full flex items-center justify-center shadow-lg border-2 border-white z-20">
+            <div key={step.id} className="bg-white/25 backdrop-blur-md rounded-2xl p-6 border border-white/40 flex flex-col items-center text-center relative group hover:bg-white/35 transition-colors duration-300">
+              <div className="absolute -top-4 -left-4 w-10 h-10 bg-white text-wedding-500 font-bold rounded-full flex items-center justify-center shadow-lg border-2 border-white z-20">
                 {step.id}
               </div>
-              <div className="mb-4 p-4 bg-white/20 rounded-full text-white group-hover:scale-110 transition-transform duration-300">
+              <div className="mb-4 p-4 bg-white/30 rounded-full text-white group-hover:scale-110 transition-transform duration-300">
                 <step.icon size={32} />
               </div>
-              <h3 className="text-xl font-bold mb-2">{step.title}</h3>
-              <p className="text-white/80 text-sm leading-relaxed">{step.description}</p>
+              <h3 className="text-xl font-bold mb-2 text-white">{step.title}</h3>
+              <p className="text-white/95 text-sm leading-relaxed">{step.description}</p>
             </div>
           ))}
         </div>

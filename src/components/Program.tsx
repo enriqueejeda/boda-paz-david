@@ -152,8 +152,8 @@ export const Program: React.FC = () => {
 
             {/* Contenido (Encima de la imagen) */}
             <div className="relative z-10 animate-fade-in">
-              <div className="inline-block px-4 py-1 mb-4 border border-white/30 rounded-full backdrop-blur-sm bg-white/10">
-                <h3 className="font-bold uppercase tracking-[0.2em] text-xs md:text-sm text-wedding-100">
+              <div className="inline-block px-4 py-1 mb-4 border border-white/40 rounded-full backdrop-blur-sm bg-white/30">
+                <h3 className="font-bold uppercase tracking-[0.2em] text-xs md:text-sm text-white">
                   📅 {currentDay.fullDate}
                 </h3>
               </div>
@@ -178,7 +178,7 @@ export const Program: React.FC = () => {
                 <Shirt size={24} />
               </div>
               <div>
-                <h4 className="font-bold text-emerald-900 text-sm uppercase tracking-wider mb-1">Dress Code Sugerido</h4>
+                <h3 className="font-bold text-emerald-900 text-sm uppercase tracking-wider mb-1">Dress Code Sugerido</h3>
                 <p className="text-emerald-800 text-lg font-serif">
                   {currentDay.dressCode}
                 </p>
@@ -202,9 +202,9 @@ export const Program: React.FC = () => {
 
                   {/* Content */}
                   <div className="grow pl-14 md:pl-0 -mt-8 md:mt-0">
-                    <h4 className="text-2xl font-serif text-emerald-900 font-bold mb-2">
+                    <h3 className="text-2xl font-serif text-emerald-900 font-bold mb-2">
                       {event.title}
-                    </h4>
+                    </h3>
 
                     <div className="flex items-center gap-2 text-emerald-700 font-medium mb-3 uppercase text-xs tracking-wider">
                       <MapPin size={14} />
