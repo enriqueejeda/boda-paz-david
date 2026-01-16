@@ -107,7 +107,7 @@ export const Program: React.FC = () => {
             <Sparkles size={20} />
           </div>
           <h2 className="text-4xl md:text-6xl font-serif text-emerald-900 mb-6">Itinerario del Fin de Semana</h2>
-          <p className="text-xl text-emerald-800/70 font-serif italic max-w-2xl mx-auto leading-relaxed">
+          <p className="text-xl text-emerald-800 font-serif italic max-w-2xl mx-auto leading-relaxed">
             "Tres días, una localización mágica y nuestra gente favorita. Aquí tenéis la hoja de ruta para no perderos nada."
           </p>
         </div>
@@ -121,7 +121,7 @@ export const Program: React.FC = () => {
                 onClick={() => setActiveTab(day.id)}
                 className={`px-6 md:px-8 py-3 rounded-full text-sm font-bold uppercase tracking-wide transition-all duration-300 ${activeTab === day.id
                   ? 'bg-emerald-900 text-white shadow-md transform scale-105'
-                  : 'text-emerald-800/60 hover:text-emerald-900 hover:bg-emerald-50'
+                  : 'text-emerald-900 hover:text-emerald-900 hover:bg-emerald-50'
                   }`}
               >
                 {day.dateLabel}

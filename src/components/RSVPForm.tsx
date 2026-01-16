@@ -252,7 +252,7 @@ export const RSVPForm: React.FC = () => {
             <CheckCircle className="w-12 h-12 text-green-600" />
           </div>
           <h3 className="text-3xl font-serif text-emerald-900 mb-4 font-bold">¡Confirmado!</h3>
-          <p className="text-emerald-800/70 text-lg mb-8 leading-relaxed">
+          <p className="text-emerald-800 text-lg mb-8 leading-relaxed">
             {formData.notAttending
               ? "Sentiremos no verte, pero gracias por avisarnos."
               : "¡Qué alegría! Ya contamos contigo para el gran día. Hemos guardado tus preferencias."}
@@ -346,7 +346,7 @@ export const RSVPForm: React.FC = () => {
               <div className="space-y-6 animate-fade-in">
                 <div className="text-center mb-6">
                   <h3 className="text-2xl font-serif text-emerald-900 mb-2">Hola, {formData.fullNames.split(' ')[0]}</h3>
-                  <p className="text-gray-500">¿Podrás acompañarnos?</p>
+                  <p className="text-gray-700">¿Podrás acompañarnos?</p>
                 </div>
 
                 <div className="grid gap-4">
@@ -361,9 +361,9 @@ export const RSVPForm: React.FC = () => {
                     <div className="flex-1">
                       <div className="flex justify-between items-center mb-1">
                         <span className={`font-bold ${formData.attendingDay2 ? 'text-emerald-900' : 'text-gray-700'}`}>EL GRAN DÍA</span>
-                        <span className="text-xs font-semibold bg-white px-2 py-1 rounded border shadow-sm text-gray-500">1 AGO</span>
+                        <span className="text-xs font-semibold bg-white px-2 py-1 rounded border shadow-sm text-gray-700">1 AGO</span>
                       </div>
-                      <p className="text-sm text-gray-500">Ceremonia & Fiesta. Lo más importante.</p>
+                      <p className="text-sm text-gray-700">Ceremonia & Fiesta. Lo más importante.</p>
                     </div>
                     <PartyPopper className={`w-6 h-6 ${formData.attendingDay2 ? 'text-wedding-500' : 'text-gray-300'}`} />
                   </div>
@@ -379,9 +379,9 @@ export const RSVPForm: React.FC = () => {
                     <div className="flex-1">
                       <div className="flex justify-between items-center mb-1">
                         <span className={`font-bold ${formData.attendingDay1 ? 'text-emerald-900' : 'text-gray-700'}`}>BIENVENIDA</span>
-                        <span className="text-xs font-semibold bg-white px-2 py-1 rounded border shadow-sm text-gray-500">31 JUL</span>
+                        <span className="text-xs font-semibold bg-white px-2 py-1 rounded border shadow-sm text-gray-700">31 JUL</span>
                       </div>
-                      <p className="text-sm text-gray-500">Cena informal y cóctel para romper el hielo.</p>
+                      <p className="text-sm text-gray-700">Cena informal y cóctel para romper el hielo.</p>
                     </div>
                     <Moon className={`w-6 h-6 ${formData.attendingDay1 ? 'text-wedding-500' : 'text-gray-300'}`} />
                   </div>
@@ -397,9 +397,9 @@ export const RSVPForm: React.FC = () => {
                     <div className="flex-1">
                       <div className="flex justify-between items-center mb-1">
                         <span className={`font-bold ${formData.attendingDay3 ? 'text-emerald-900' : 'text-gray-700'}`}>DESPEDIDA</span>
-                        <span className="text-xs font-semibold bg-white px-2 py-1 rounded border shadow-sm text-gray-500">2 AGO</span>
+                        <span className="text-xs font-semibold bg-white px-2 py-1 rounded border shadow-sm text-gray-700">2 AGO</span>
                       </div>
-                      <p className="text-sm text-gray-500">Brunch y piscina antes de volver.</p>
+                      <p className="text-sm text-gray-700">Brunch y piscina antes de volver.</p>
                     </div>
                     <Utensils className={`w-6 h-6 ${formData.attendingDay3 ? 'text-wedding-500' : 'text-gray-300'}`} />
                   </div>
@@ -430,7 +430,7 @@ export const RSVPForm: React.FC = () => {
                   <div className="flex items-center justify-between p-4 bg-gray-50 rounded-xl mb-4">
                     <div>
                       <span className="block font-bold text-gray-800">Adultos</span>
-                      <span className="text-xs text-gray-500">Mayores de 12 años</span>
+                      <span className="text-xs text-gray-700">Mayores de 12 años</span>
                     </div>
                     <div className="flex items-center gap-4 bg-white px-2 py-1 rounded-lg shadow-sm">
                       <button
@@ -452,7 +452,7 @@ export const RSVPForm: React.FC = () => {
                   <div className="flex items-center justify-between p-4 bg-gray-50 rounded-xl">
                     <div>
                       <span className="block font-bold text-gray-800">Niños</span>
-                      <span className="text-xs text-gray-500">Menores de 12 años</span>
+                      <span className="text-xs text-gray-700">Menores de 12 años</span>
                     </div>
                     <div className="flex items-center gap-4 bg-white px-2 py-1 rounded-lg shadow-sm">
                       <button
@@ -520,7 +520,7 @@ export const RSVPForm: React.FC = () => {
                   <div className="p-6 bg-gray-50 rounded-xl border border-gray-200">
                     <p className="text-gray-600 mb-2">Has indicado que</p>
                     <p className="text-xl font-bold text-red-500 mb-2">No podrás asistir</p>
-                    <p className="text-sm text-gray-500">Esperamos poder celebrar contigo en otra ocasión.</p>
+                    <p className="text-sm text-gray-700">Esperamos poder celebrar contigo en otra ocasión.</p>
                   </div>
                 ) : (
                   <div className="space-y-4">
