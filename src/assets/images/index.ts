@@ -4,7 +4,10 @@ const David_Paz_3 = new URL('./David_Paz_3.webp', import.meta.url).href;
 const David_Paz_4 = new URL('./David_Paz_4.webp', import.meta.url).href;
 const David_Paz_5 = new URL('./David_Paz_5.webp', import.meta.url).href;
 const David_Paz_6 = new URL('./David_Paz_6.webp', import.meta.url).href;
+const David_Paz_7 = new URL('./David_Paz_7.webp', import.meta.url).href;
+const David_Paz_8 = new URL('./David_Paz_8.webp', import.meta.url).href;
 const Logo_Boda = new URL('./logo-boda.png', import.meta.url).href;
+
 
 export const IMAGES = {
     hero: David_Paz_hero,
@@ -12,6 +15,8 @@ export const IMAGES = {
     image2: David_Paz_4,
     image3: David_Paz_5,
     image4: David_Paz_6,
+    image5: David_Paz_7,
+    image6: David_Paz_8,
     logo: Logo_Boda
 };
 

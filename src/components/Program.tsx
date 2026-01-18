@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
-import { Sun, Coffee, Music, GlassWater, Church, PartyPopper, MapPin, Sparkles, Shirt, Info } from 'lucide-react';
+import { Shirt, Info } from 'lucide-react';
 import { Day } from '../types';
+import IMAGES from '../assets/images';
 
 interface EventDetails {
   time: string;
   title: string;
-  location: string;
-  icon: React.ElementType;
-  tip: string;
+  tip?: string;
 }
 
 interface DayConfig {
@@ -15,7 +14,6 @@ interface DayConfig {
   dateLabel: string;
   fullDate: string;
   theme: string;
-  vibe: string;
   dressCode: string;
   image: string; // Nueva propiedad para la imagen de fondo
   events: EventDetails[];
@@ -29,66 +27,60 @@ export const Program: React.FC = () => {
       id: Day.DAY2,
       dateLabel: '1 Agosto',
       fullDate: 'Sábado, 1 de Agosto',
-      theme: 'El Gran Día',
-      vibe: 'Emoción a flor de piel, lágrimas de felicidad y baile hasta que salga el sol.',
-      dressCode: 'Etiqueta / Formal (Ellos: Traje oscuro. Ellas: Vestido largo o cóctel elegante).',
-      // Imagen: Floral, elegante, ceremonia bosque
-      image: '',
+      theme: 'La Boda',
+      dressCode: 'No hay código de vestimenta, elegancia natural y muchas ganas de disfrutar.',
+      image: IMAGES.image2,
       events: [
         {
-          time: '12:30',
-          title: 'Ceremonia Civil',
-          location: 'El Bosque de las Hayas',
-          icon: Church,
-          tip: 'Por favor, sed puntuales. Habrá abanicos para el calor.'
+          time: '13:30',
+          title: 'Llegada de invitados'
         },
         {
-          time: '14:00',
-          title: 'El Gran Banquete',
-          location: 'Salón de Cristal',
-          icon: GlassWater,
-          tip: 'Preparaos para un festín gastronómico de 3 horas.'
+          time: '14:30',
+          title: 'Ceremonia'
+        },
+        {
+          time: '15:00',
+          title: 'Coctel'
+        },
+        {
+          time: '17:00',
+          title: 'Comida'
         },
         {
           time: '18:00',
-          title: 'Fiesta & Baile',
-          location: 'Pista de Baile Exterior',
-          icon: Music,
-          tip: '¡Barra libre! Aseguraos de llevar calzado cómodo para el baile.'
+          title: 'Baile & Fiesta'
         },
       ]
+    },
+    {
+      id: Day.DAY1,
+      dateLabel: '31 Julio',
+      fullDate: 'Viernes, 31 de Julio',
+      theme: 'Pre-Boda',
+      dressCode: 'No hay código de vestimenta',
+      // Imagen: Atardecer, bienvenida, naturaleza
+      image: IMAGES.image6,
+      events: [
+        {
+          time: 'Cena',
+          title: 'Para quienes lleguen con tiempo (y ganas), el viernes por la noche nos juntaremos para cenar de manera informal en algún sitio cercano. Sin protocolo, y con la mejor excusa posible: empezar a vernos y compartir mesa y risas, con calma',
+          tip: 'Lugar y hora por confirmar más adelante.'
+        }]
     },
     {
       id: Day.DAY3,
       dateLabel: '2 Agosto',
       fullDate: 'Domingo, 2 de Agosto',
-      theme: 'La Despedida',
-      vibe: 'Gafas de sol, relax total y comentar las mejores anécdotas de la noche anterior.',
-      dressCode: 'Pool Party / Relajado (Estilo ibicenco o veraniego. ¡Traed bañador!).',
+      theme: 'Post-Boda',
+      dressCode: 'No hay código de vestimenta',
       // Imagen: Piscina, verano, fresco
-      image: '',
+      image: IMAGES.image5,
       events: [
         {
-          time: '13:00',
-          title: 'Brunch de Recuperación',
-          location: 'Zona de Piscina',
-          icon: Coffee,
-          tip: 'Tendremos zona de sombra y bebidas detox.'
-        },
-        {
-          time: '15:00',
-          title: 'Paella de Despedida',
-          location: 'Terraza de la Sierra',
-          icon: Sun,
-          tip: 'La mejor forma de coger fuerzas antes del viaje de vuelta.'
-        },
-        {
-          time: '18:00',
-          title: 'Cierre del Fin de Semana',
-          location: 'Salida Principal',
-          icon: PartyPopper,
-          tip: 'Besos, abrazos y un "hasta luego".'
-        },
+          time: 'Comida',
+          title: 'A la hora de comer, alargaremos la celebración con una paella en la misma finca.'
+        }
       ]
     }
   ];
@@ -133,8 +125,6 @@ export const Program: React.FC = () => {
               }}
             >
               {/* Overlay oscuro para legibilidad (Gradient) */}
-              <div className="absolute inset-0 bg-emerald-900/60 mix-blend-multiply"></div>
-              <div className="absolute inset-0 bg-linear-to-t from-emerald-900/90 via-transparent to-emerald-900/30"></div>
             </div>
 
             {/* Contenido (Encima de la imagen) */}
@@ -151,9 +141,6 @@ export const Program: React.FC = () => {
 
               <div className="w-24 h-1 bg-wedding-400 mx-auto mb-6 rounded-full"></div>
 
-              <p className="text-lg md:text-2xl font-light italic text-white/90 max-w-2xl mx-auto leading-relaxed drop-shadow-md">
-                "{currentDay.vibe}"
-              </p>
             </div>
           </div>
 
@@ -182,9 +169,6 @@ export const Program: React.FC = () => {
                     <span className="text-2xl md:text-3xl font-bold text-wedding-500 font-mono">
                       {event.time}
                     </span>
-                    <div className="p-3 rounded-full bg-emerald-100 text-emerald-800 border-4 border-white shadow-md md:order-last group-hover:bg-wedding-500 group-hover:text-white transition-colors duration-300">
-                      <event.icon size={20} />
-                    </div>
                   </div>
 
                   {/* Content */}
@@ -192,23 +176,34 @@ export const Program: React.FC = () => {
                     <h3 className="text-2xl font-serif text-emerald-900 font-bold mb-2">
                       {event.title}
                     </h3>
-
-                    <div className="flex items-center gap-2 text-emerald-700 font-medium mb-3 uppercase text-xs tracking-wider">
-                      <MapPin size={14} />
-                      {event.location}
-                    </div>
-
-                    <div className="bg-gray-50 p-4 rounded-lg rounded-tl-none border border-gray-100 inline-block">
-                      <p className="text-emerald-800/80 text-sm flex items-start gap-2">
-                        <Info size={16} className="text-wedding-500 shrink-0 mt-0.5" />
-                        <span className="italic">{event.tip}</span>
-                      </p>
-                    </div>
                   </div>
-
                 </div>
               ))}
             </div>
+
+            {/* Optional Note for DAY1 (31 Julio) */}
+            {activeTab === Day.DAY1 && (
+              <div className="mt-12 pt-8 border-t border-emerald-200">
+                <div className="flex items-start gap-3">
+                  <Info size={20} className="text-wedding-500 shrink-0 mt-1" />
+                  <p className="text-emerald-800 italic text-lg">
+                    "No es obligatorio, pero sí recomendable."
+                  </p>
+                </div>
+              </div>
+            )}
+
+            {/* Optional Note for DAY3 (2 Agosto) */}
+            {activeTab === Day.DAY3 && (
+              <div className="mt-12 pt-8 border-t border-emerald-200">
+                <div className="flex items-start gap-3">
+                  <Info size={20} className="text-wedding-500 shrink-0 mt-1" />
+                  <p className="text-emerald-800 italic text-lg">
+                    "Venid con hambre y sin reloj."
+                  </p>
+                </div>
+              </div>
+            )}
 
           </div>
         </div>
