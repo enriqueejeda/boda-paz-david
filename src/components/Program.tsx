@@ -124,7 +124,7 @@ export const Program: React.FC = () => {
               }}
             >
               {/* Overlay oscuro para legibilidad (Gradient) */}
-              <div className="absolute inset-0 bg-[#2F3E34]/60 mix-blend-multiply"></div>
+              <div className="absolute inset-0 bg-[#2F3E34]/40 mix-blend-multiply"></div>
             </div>
 
             {/* Contenido (Encima de la imagen) */}
