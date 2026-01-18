@@ -6,7 +6,6 @@ import { Footer } from './components/Footer';
 // Lazy load components that are not immediately visible
 const Program = React.lazy(() => import('./components/Program').then(module => ({ default: module.Program })));
 const RSVPForm = React.lazy(() => import('./components/RSVPForm').then(module => ({ default: module.RSVPForm })));
-const FAQ = React.lazy(() => import('./components/FAQ').then(module => ({ default: module.FAQ })));
 const MusicRequest = React.lazy(() => import('./components/MusicRequest').then(module => ({ default: module.MusicRequest })));
 
 // Loading fallback component
