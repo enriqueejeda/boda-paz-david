@@ -79,7 +79,7 @@ export const Header: React.FC = () => {
           <a
             href="#rsvp"
             onClick={(e) => handleNavigation(e, '#rsvp')}
-            className="px-6 py-2 text-white font-semibold rounded-full shadow-lg transform hover:-translate-y-0.5 transition-all duration-200 bg-emerald-600 hover:bg-emerald-700"
+            className="px-6 py-2 text-white font-semibold rounded-full shadow-lg transform hover:-translate-y-0.5 transition-all duration-200 bg-[#6B7F6A] hover:bg-emerald-700"
           >
             Confirma Asistencia
           </a>

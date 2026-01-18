@@ -279,7 +279,7 @@ export const RSVPForm: React.FC = () => {
     if (errors.eventos) setErrors(prev => ({ ...prev, eventos: undefined }));
   };
   return (
-    <div className="py-20 md:py-28 bg-emerald-900 relative overflow-hidden">
+    <div className="py-20 md:py-28 bg-[#2F3E34] relative overflow-hidden">
       {/* Background Decor */}
       <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
         <div className="absolute top-20 right-20 w-64 h-64 bg-wedding-400 rounded-full blur-3xl"></div>
