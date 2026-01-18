@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { Menu, X, Heart } from 'lucide-react';
-
+import { Heart, Menu, X } from 'lucide-react';
+import { IMAGES } from '../assets/images';
 export const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -36,11 +36,19 @@ export const Header: React.FC = () => {
 
   const navLinks = [
     { name: 'Inicio', href: '#home' },
-    { name: 'Programa', href: '#program' },
-    { name: 'Ubicación', href: '#logistics' },
-    { name: 'Música', href: '#music' },
+    { name: 'Información Práctica', href: '#program' },
   ];
 
+  const handleScroll = useCallback((e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    setIsMobileMenuOpen(false);
+
+    const targetId = href.replace('#', '');
+    const element = document.getElementById(targetId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, []);
   return (
     <header
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-emerald-900 py-2' : 'bg-transparent py-3'}`}
@@ -52,9 +60,8 @@ export const Header: React.FC = () => {
           onClick={(e) => handleScroll(e, '#home')}
           className={`text-2xl font-serif italic font-bold flex items-center gap-2 text-white`}
         >
-          <span>Paz</span>
-          <Heart className="w-5 h-5 text-wedding-500 fill-wedding-500" />
-          <span>David</span>
+          {/* <Heart /> */}
+          <img src={IMAGES.logo} alt="Logo Boda Paz y David" className="w-20" />
         </a>
 
         {/* Desktop Navigation */}
