@@ -10,13 +10,16 @@ const SCENES = [
     content: (
       <>
         <motion.p className="text-gray-200 font-sans tracking-[0.4em] text-[10px] md:text-sm uppercase mb-4 md:mb-6 font-bold">
-          Capítulo I
+          1 de Agosto de 2026
         </motion.p>
         <h1 className="text-5xl md:text-9xl font-serif text-white leading-none tracking-tight mb-6 md:mb-8 drop-shadow-2xl">
           Paz <span className="text-wedding-200 italic">&</span> David
         </h1>
-        <p className="font-serif italic text-lg md:text-xl text-gray-200 max-w-lg mx-auto leading-relaxed border-t border-black/20 pt-6 mt-6">
-          "El amor no se trata de mirar el uno al otro, sino de mirar juntos en la misma dirección."
+        <p className="font-sans font-medium text-lg md:text-2xl text-wedding-50 tracking-wide text-white/90 max-w-2xl mx-auto leading-relaxed">
+          La Granja de Lozoya
+        </p>
+        <p className="font-serif italic text-lg md:text-xl text-gray-200 max-w-lg mx-auto leading-relaxed border-t border-white pt-6 mt-6">
+          "Un día para celebrar lo que somos, con quien más queremos."
         </p>
       </>
     )
@@ -78,10 +81,13 @@ const BackgroundLayer: React.FC<{
 }> = ({ img, index, range, scrollYProgress }) => {
   const opacity = useTransform(
     scrollYProgress,
-    index === 0 ? [0, range[1] - 0.01, range[1] + 0.01] : [range[0] - 0.01, range[0], range[1], range[1] + 0.01],
-    index === 0 ? [1, 1, 0] : [0, 1, 1, 0]
+    index === 0
+      ? [0, range[1] - 0.15, range[1]]
+      : [range[0] - 0.1, range[0], range[1] - 0.1, range[1]],
+    index === 0 ? [1, 1, 0] : [0, 1, 1, 0],
+    { clamp: false }
   );
-  const scale = useTransform(scrollYProgress, range, [1, 1.03]);
+  const scale = useTransform(scrollYProgress, range, [1.05, 1], { clamp: false });
 
   return (
     <motion.div
@@ -118,10 +124,18 @@ const TextLayer: React.FC<{
 }> = ({ children, index, range, scrollYProgress }) => {
   const opacity = useTransform(
     scrollYProgress,
-    index === 0 ? [0, range[1] - 0.05, range[1]] : [range[0], range[0] + 0.05, range[1] - 0.05, range[1]],
-    index === 0 ? [1, 1, 0] : [0, 1, 1, 0]
+    index === 0
+      ? [0, range[0] + 0.05, range[1] - 0.15, range[1]]
+      : [range[0] - 0.05, range[0] + 0.05, range[1] - 0.15, range[1]],
+    index === 0 ? [1, 1, 1, 0] : [0, 1, 1, 0],
+    { clamp: false }
   );
-  const y = useTransform(scrollYProgress, range, [10, -10]);
+  const y = useTransform(
+    scrollYProgress,
+    [range[0], range[0] + 0.2, range[1] - 0.2, range[1]],
+    [30, 0, 0, -30],
+    { clamp: false }
+  );
 
   return (
     <motion.div
@@ -142,7 +156,7 @@ export const Hero: React.FC = () => {
 
   return (
     <div ref={containerRef} className="relative h-[400vh] w-full">
-      <div className="sticky top-0 h-screen w-full overflow-hidden">
+      <div className="sticky top-0 h-screen w-full overflow-hidden bg-black">
         {SCENES.map((scene, i) => {
           const step = 1 / SCENES.length;
           const start = i * step;
@@ -158,7 +172,7 @@ export const Hero: React.FC = () => {
         })}
         <motion.div
           style={{ opacity: useTransform(scrollYProgress, [0, 0.01], [1, 0]) }}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 z-50 text-wedding-50 flex flex-col items-center gap-2 pointer-events-none"
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 z-50 text-white flex flex-col items-center gap-2 pointer-events-none"
         >
           <div className="animate-bounce mt-8 md:mt-12">
             <span className="text-[9px] md:text-[10px] uppercase tracking-[0.3em] font-sans font-bold text-gray-200">Desliza para comenzar</span>
