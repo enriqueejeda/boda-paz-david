@@ -117,14 +117,15 @@ export const Program: React.FC = () => {
 
             {/* Imagen de Fondo Dinámica */}
             <div
-              className="absolute inset-0 bg-cover bg-center transition-transform duration-1500 ease-out group-hover:scale-105"
+              className="absolute inset-0 bg-cover bg-center md:bg-fixed transition-transform duration-1500 ease-out group-hover:scale-105"
               style={{
                 backgroundImage: `url('${currentDay.image}')`,
-                willChange: 'transform',
-                backgroundAttachment: 'fixed'
+                willChange: 'transform'
               }}
             >
               {/* Overlay oscuro para legibilidad (Gradient) */}
+              <div className="absolute inset-0 bg-emerald-900/40 mix-blend-multiply"></div>
+              <div className="absolute inset-0 bg-linear-to-t from-emerald-900/80 via-transparent to-emerald-900/20"></div>
             </div>
 
             {/* Contenido (Encima de la imagen) */}
