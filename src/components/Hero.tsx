@@ -78,10 +78,10 @@ const BackgroundLayer: React.FC<{
 }> = ({ img, index, range, scrollYProgress }) => {
   const opacity = useTransform(
     scrollYProgress,
-    index === 0 ? [0, range[1] - 0.05, range[1]] : [range[0] - 0.05, range[0], range[1] - 0.05, range[1]],
+    index === 0 ? [0, range[1] - 0.01, range[1] + 0.01] : [range[0] - 0.01, range[0], range[1], range[1] + 0.01],
     index === 0 ? [1, 1, 0] : [0, 1, 1, 0]
   );
-  const scale = useTransform(scrollYProgress, range, [1, 1.05]);
+  const scale = useTransform(scrollYProgress, range, [1, 1.03]);
 
   return (
     <motion.div
@@ -90,7 +90,7 @@ const BackgroundLayer: React.FC<{
     >
       <motion.div
         style={{ scale }}
-        className="w-full h-full bg-emerald-950 will-change-transform"
+        className="w-full h-full bg-black will-change-transform"
         initial={false}
       >
         <img
@@ -118,10 +118,10 @@ const TextLayer: React.FC<{
 }> = ({ children, index, range, scrollYProgress }) => {
   const opacity = useTransform(
     scrollYProgress,
-    index === 0 ? [0, range[1] - 0.1, range[1]] : [range[0], range[0] + 0.08, range[1] - 0.08, range[1]],
+    index === 0 ? [0, range[1] - 0.05, range[1]] : [range[0], range[0] + 0.05, range[1] - 0.05, range[1]],
     index === 0 ? [1, 1, 0] : [0, 1, 1, 0]
   );
-  const y = useTransform(scrollYProgress, range, [20, -20]);
+  const y = useTransform(scrollYProgress, range, [10, -10]);
 
   return (
     <motion.div
@@ -141,12 +141,12 @@ export const Hero: React.FC = () => {
   });
 
   return (
-    <div ref={containerRef} className="relative h-[600vh] w-full">
+    <div ref={containerRef} className="relative h-[400vh] w-full">
       <div className="sticky top-0 h-screen w-full overflow-hidden">
         {SCENES.map((scene, i) => {
           const step = 1 / SCENES.length;
           const start = i * step;
-          const end = start + step + (i === SCENES.length - 1 ? 0 : 0.05);
+          const end = start + step;
           return (
             <React.Fragment key={scene.id}>
               <BackgroundLayer img={scene.img} index={i} range={[start, end]} scrollYProgress={scrollYProgress} />
