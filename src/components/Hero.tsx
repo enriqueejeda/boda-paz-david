@@ -1,10 +1,17 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform, MotionValue } from 'framer-motion';
-import { ChevronDown, MapPin, MoveDown } from 'lucide-react';
+import { MapPin, MoveDown } from 'lucide-react';
 import { IMAGES } from '../assets/images';
 import { FAQ } from './FAQ';
 
-const SCENES = [
+type Scene = {
+  id: number;
+  img: string;
+  content: React.ReactNode;
+  interactive?: boolean;
+};
+
+const SCENES: Scene[] = [
   {
     id: 1,
     img: IMAGES.hero,
@@ -55,18 +62,23 @@ const SCENES = [
   {
     id: 4,
     img: IMAGES.image3,
+    interactive: true,
     content: (
-      <div className="flex flex-col items-center justify-center gap-8">
-        <div className="flex flex-col items-center justify-center gap-4 max-w-2xl px-4">
+      <div className="flex flex-col items-center gap-8 w-full px-4">
+        <div className="space-y-3 text-center max-w-3xl">
+          <span className="font-sans text-[11px] tracking-[0.35em] uppercase text-white/70">Cómo llegar</span>
           <h2 className="text-3xl md:text-5xl text-[#D8CFC4] font-serif italic drop-shadow-xl">
             Cuándo & Dónde
           </h2>
-          <p className="font-sans text-sm md:text-lg text-white/80 tracking-wide">
+          <p className="font-sans text-sm md:text-lg text-white/85 tracking-wide">
             Sábado, 1 de Agosto de 2026
           </p>
-          <div className="w-12 md:w-16 h-px bg-white/40 mx-auto"></div>
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 border border-white/20 rounded-full text-white/90">
+            <MapPin size={18} className="text-[#D8CFC4]" />
+            <span className="font-medium text-sm md:text-base">La Granja de Lozoya · Madrid</span>
+          </div>
         </div>
-        <div className="relative z-30 w-full max-w-5xl px-4">
+        <div className="w-full max-w-5xl pointer-events-auto">
           <FAQ />
         </div>
       </div>
@@ -81,7 +93,24 @@ const SCENES = [
           <h2 className="text-3xl md:text-5xl text-[#D8CFC4] font-serif italic drop-shadow-xl">
             Horarios
           </h2>
+          <p className="font-sans text-sm md:text-lg text-white/85 tracking-wide text-center">
+            Orientativos, queremos disfrutar sin prisas.
+          </p>
+
           <div className="w-12 md:w-16 h-px bg-white/40 mx-auto"></div>
+          {/* Animacion desliza para verlos */}
+          <motion.div className="flex flex-col items-center gap-3">
+            <motion.div
+              animate={{ y: [0, 8, 0] }}
+              transition={{ duration: 2, repeat: Infinity }}
+              className="flex flex-col items-center gap-2"
+            >
+              <span className="text-[11px] md:text-sm uppercase tracking-[0.3em] font-sans font-bold text-white/70">
+                Desliza para verlos
+              </span>
+              <MoveDown size={20} className="text-[#D8CFC4]" />
+            </motion.div>
+          </motion.div>
         </div>
       </div>
     )
@@ -136,7 +165,8 @@ const TextLayer: React.FC<{
   index: number;
   range: [number, number];
   scrollYProgress: MotionValue<number>;
-}> = ({ children, index, range, scrollYProgress }) => {
+  interactive?: boolean;
+}> = ({ children, index, range, scrollYProgress, interactive }) => {
   const opacity = useTransform(
     scrollYProgress,
     index === 0
@@ -154,7 +184,7 @@ const TextLayer: React.FC<{
 
   return (
     <motion.div
-      style={{ opacity, y, pointerEvents: 'none' }}
+      style={{ opacity, y, pointerEvents: interactive ? 'auto' : 'none' }}
       className="absolute inset-0 w-full h-full flex flex-col items-center justify-center text-center px-4 md:px-6 z-20 will-change-transform"
     >
       <div className="max-w-5xl">{children}</div>
@@ -179,7 +209,12 @@ export const Hero: React.FC = () => {
           return (
             <React.Fragment key={scene.id}>
               <BackgroundLayer img={scene.img} index={i} range={[start, end]} scrollYProgress={scrollYProgress} />
-              <TextLayer index={i} range={[start, start + step]} scrollYProgress={scrollYProgress}>
+              <TextLayer
+                index={i}
+                range={[start, start + step]}
+                scrollYProgress={scrollYProgress}
+                interactive={scene.interactive}
+              >
                 {scene.content}
               </TextLayer>
             </React.Fragment>
