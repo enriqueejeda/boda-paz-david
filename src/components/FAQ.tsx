@@ -6,12 +6,11 @@ import { MapPin } from 'lucide-react';
 export const FAQ: React.FC = () => {
 
   return (
-    <div className="py-20">
+    <div className="">
       <div className="container mx-auto px-6 max-w-5xl">
 
         {/* Map Column */}
         <div className="flex flex-col h-full">
-          <h3 className="text-2xl font-serif text-emerald-900 mb-6">Ubicación</h3>
           <div className="bg-white rounded-2xl overflow-hidden grow min-h-100 shadow-xl relative border-4 border-white group">
 
             {/* Google Maps Iframe */}
@@ -20,7 +19,7 @@ export const FAQ: React.FC = () => {
               height="100%"
               title="Mapa de La Granja de Lozoya"
               src="https://maps.google.com/maps?q=La%20Granja%20de%20Lozoya%2C%20Madrid&t=&z=14&ie=UTF8&iwloc=&output=embed"
-              className="absolute inset-0 w-full h-full border-0 grayscale-20 group-hover:grayscale-0 transition-all duration-500"
+              className="absolute w-300 inset-0 border-0 grayscale-20 group-hover:grayscale-0 transition-all duration-500"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
             ></iframe>

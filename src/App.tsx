@@ -19,7 +19,7 @@ const LoadingSpinner = () => (
 const App: React.FC = () => {
 
   return (
-    <div className="flex flex-col min-h-screen bg-emerald-900">
+    <div className="flex flex-col min-h-screen">
       <Header />
 
       <main className="grow">
@@ -29,7 +29,7 @@ const App: React.FC = () => {
         </section>
 
         {/* FASE 2: CONTENIDO FUNCIONAL (Aparece tras el scroll de la intro) */}
-        <div className="relative z-10 bg-white shadow-[0_-20px_40px_rgba(0,0,0,0.1)] -mt-20 pt-20 rounded-t-3xl">
+        <div className="relative z-10 bg-[#F3EFE8] shadow-[0_-20px_40px_rgba(0,0,0,0.1)] -mt-20 pt-20 rounded-t-3xl">
           <Suspense fallback={<LoadingSpinner />}>
             <section id="program" className="scroll-mt-20">
               <Program />
@@ -39,12 +39,8 @@ const App: React.FC = () => {
               <RSVPForm />
             </section>
 
-            <section id="music" className="scroll-mt-20 bg-amber-600">
+            <section id="music" className="scroll-mt-20">
               <MusicRequest />
-            </section>
-
-            <section id="logistics" className="scroll-mt-20">
-              <FAQ />
             </section>
           </Suspense>
         </div>

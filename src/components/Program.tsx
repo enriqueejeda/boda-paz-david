@@ -96,25 +96,12 @@ export const Program: React.FC = () => {
   const currentDay = schedule.find(d => d.id === activeTab) || schedule[1];
 
   return (
-    <div className="py-24 bg-wedding-50/50">
+    <div className="py-24 bg-[#F3Efe8]">
       <div className="container mx-auto px-4 md:px-6 max-w-4xl">
-
-        {/* Header Editorial */}
-        <div className="text-center mb-16">
-          <div className="flex justify-center items-center gap-2 mb-4 text-wedding-500">
-            <Sparkles size={20} />
-            <span className="font-bold tracking-[0.2em] uppercase text-sm">Guía de Invitados</span>
-            <Sparkles size={20} />
-          </div>
-          <h2 className="text-4xl md:text-6xl font-serif text-emerald-900 mb-6">Itinerario del Fin de Semana</h2>
-          <p className="text-xl text-emerald-800 font-serif italic max-w-2xl mx-auto leading-relaxed">
-            "Tres días, una localización mágica y nuestra gente favorita. Aquí tenéis la hoja de ruta para no perderos nada."
-          </p>
-        </div>
 
         {/* Navigation Tabs */}
         <div className="flex flex-wrap justify-center mb-12">
-          <div className="bg-white p-2 rounded-full shadow-lg border border-wedding-100 flex flex-wrap justify-center gap-2">
+          <div className="bg-[#F3Efe8] p-2 rounded-full shadow-lg border border-wedding-100 flex flex-wrap justify-center gap-2">
             {schedule.map((day) => (
               <button
                 key={day.id}

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { Heart, Menu, X } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { IMAGES } from '../assets/images';
 export const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -51,7 +51,7 @@ export const Header: React.FC = () => {
   }, []);
   return (
     <header
-      className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-emerald-900 py-2' : 'bg-transparent py-3'}`}
+      className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-[#2F3E34] py-2' : 'bg-transparent py-3'}`}
     >
       <div className="container mx-auto px-6 flex justify-between items-center">
         {/* Logo / Names */}
@@ -104,7 +104,7 @@ export const Header: React.FC = () => {
                 key={link.name}
                 href={link.href}
                 onClick={(e) => handleNavigation(e, link.href)}
-                className="text-emerald-900 hover:text-wedding-500 font-medium py-2 border-b border-gray-50"
+                className="text-emerald-900 font-medium py-2 border-b border-gray-50"
               >
                 {link.name}
               </a>
@@ -112,7 +112,7 @@ export const Header: React.FC = () => {
             <a
               href="#rsvp"
               onClick={(e) => handleNavigation(e, '#rsvp')}
-              className="mt-4 w-full text-center px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-lg"
+              className="mt-4 w-full text-center px-6 py-3 bg-[#6B7F6A] text-white font-semibold rounded-lg"
             >
               Confirmar Asistencia
             </a>
