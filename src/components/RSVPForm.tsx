@@ -3,13 +3,22 @@ import {
   Send, CheckCircle, AlertCircle, AlertTriangle,
   User, Mail, ChevronRight, ChevronLeft,
   Utensils, Users, X, PartyPopper, Moon, UserPlus,
-  Info
+  Info, Beef, Fish
 } from 'lucide-react';
 
 // --- CONFIGURACIÓN ---
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxnhIbX-y0O1YKt6u8HH7JoXDsXUcfIfCeo1-FG2l5AIA5X0kdDQOyvdGJcl6O2y020/exec';
+const GOOGLE_SCRIPT_URL = import.meta.env.VITE_GOOGLE_SCRIPT_URL || '';
 
 // --- TIPOS ---
+interface GuestInfo {
+  name: string;
+  menuPreference: 'carne' | 'pescado' | '';
+}
+
+interface ChildInfo {
+  name: string;
+}
+
 interface FormData {
   fullNames: string;
   emailTelefono: string;
@@ -19,7 +28,9 @@ interface FormData {
   notAttending: boolean;
   adultCount: number;
   childCount: number;
-  additionalGuests: string[]; // Array para guardar nombres de acompañantes
+  mainGuestMenu: 'carne' | 'pescado' | '';
+  additionalGuests: GuestInfo[]; // Array con nombres y preferencias
+  childGuests: ChildInfo[]; // Nombres de niños (sin elección de menú)
   dietaryRestrictions: string;
 }
 
@@ -50,34 +61,53 @@ export const RSVPForm: React.FC = () => {
     notAttending: false,
     adultCount: 1,
     childCount: 0,
+    mainGuestMenu: '',
     additionalGuests: [],
+    childGuests: [],
     dietaryRestrictions: '',
   });
 
   const [errors, setErrors] = useState<FormErrors>({});
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+  const [botField, setBotField] = useState('');
 
-  // Calcular cuántos acompañantes extra hay (Total - 1, que eres tú)
-  const totalGuests = formData.adultCount + formData.childCount;
-  const companionsNeeded = Math.max(0, totalGuests - 1);
+  // Solo pedimos menú/nombre para acompañantes adultos; los niños tienen menú propio
+  const companionsNeeded = Math.max(0, formData.adultCount - 1);
+  const childrenNeeded = Math.max(0, formData.childCount);
 
-  // Efecto para ajustar el array de nombres si cambia el número de invitados
+  // Efecto para ajustar el array de invitados si cambia el número
   useEffect(() => {
     setFormData(prev => {
       const currentGuests = prev.additionalGuests;
       if (currentGuests.length === companionsNeeded) return prev;
 
-      // Si necesitamos más huecos, añadimos cadenas vacías. Si menos, cortamos.
       let newGuests = [...currentGuests];
       if (currentGuests.length < companionsNeeded) {
         const diff = companionsNeeded - currentGuests.length;
-        newGuests = [...newGuests, ...Array(diff).fill('')];
+        newGuests = [...newGuests, ...Array(diff).fill({ name: '', menuPreference: '' })];
       } else {
         newGuests = newGuests.slice(0, companionsNeeded);
       }
       return { ...prev, additionalGuests: newGuests };
     });
   }, [companionsNeeded]);
+
+  // Ajustar lista de niños cuando cambia el número
+  useEffect(() => {
+    setFormData(prev => {
+      const currentKids = prev.childGuests;
+      if (currentKids.length === childrenNeeded) return prev;
+
+      let newKids = [...currentKids];
+      if (currentKids.length < childrenNeeded) {
+        const diff = childrenNeeded - currentKids.length;
+        newKids = [...newKids, ...Array(diff).fill({ name: '' })];
+      } else {
+        newKids = newKids.slice(0, childrenNeeded);
+      }
+      return { ...prev, childGuests: newKids };
+    });
+  }, [childrenNeeded]);
 
   // --- MANEJADORES (Memoizados) ---
 
@@ -88,11 +118,20 @@ export const RSVPForm: React.FC = () => {
     }
   }, [errors]);
 
-  const updateGuestName = useCallback((index: number, value: string) => {
+  const updateGuestInfo = useCallback((index: number, field: 'name' | 'menuPreference', value: string) => {
     setFormData(prev => {
       const newGuests = [...prev.additionalGuests];
-      newGuests[index] = value;
+      newGuests[index] = { ...newGuests[index], [field]: value };
       return { ...prev, additionalGuests: newGuests };
+    });
+    if (errors.guestNames) setErrors(prev => ({ ...prev, guestNames: undefined }));
+  }, [errors]);
+
+  const updateChildName = useCallback((index: number, value: string) => {
+    setFormData(prev => {
+      const newKids = [...prev.childGuests];
+      newKids[index] = { ...newKids[index], name: value };
+      return { ...prev, childGuests: newKids };
     });
     if (errors.guestNames) setErrors(prev => ({ ...prev, guestNames: undefined }));
   }, [errors]);
@@ -142,9 +181,16 @@ export const RSVPForm: React.FC = () => {
 
     if (step === 3) {
       if (companionsNeeded > 0) {
-        const emptyNames = formData.additionalGuests.some(name => !name.trim());
+        const emptyNames = formData.additionalGuests.some(g => !g.name.trim());
         if (emptyNames) {
           newErrors.guestNames = "Por favor, escribe el nombre de todos tus acompañantes.";
+          isValid = false;
+        }
+      }
+      if (childrenNeeded > 0) {
+        const emptyKids = formData.childGuests.some(k => !k.name.trim());
+        if (emptyKids) {
+          newErrors.guestNames = "Por favor, escribe el nombre de todos los niños.";
           isValid = false;
         }
       }
@@ -178,6 +224,18 @@ export const RSVPForm: React.FC = () => {
   // --- SUBMIT ---
 
   const handleSubmit = useCallback(async () => {
+    if (!GOOGLE_SCRIPT_URL) {
+      setErrors({ general: 'Configuración de envío no disponible. Contacta con nosotros.' });
+      setStatus('error');
+      return;
+    }
+
+    if (botField.trim()) {
+      setErrors({ general: 'Ha ocurrido un error al enviar.' });
+      setStatus('error');
+      return;
+    }
+
     setStatus('submitting');
 
     const eventosSeleccionados = [];
@@ -186,7 +244,17 @@ export const RSVPForm: React.FC = () => {
     if (formData.attendingDay3) eventosSeleccionados.push("2 Agosto (Despedida)");
     if (formData.notAttending) eventosSeleccionados.push("No asistirá");
 
-    const listaAcompanantes = formData.additionalGuests.filter(n => n.trim()).join(", ");
+    const listaAcompanantes = formData.additionalGuests
+      .filter(g => g.name.trim())
+      .map(g => `${g.name} (${g.menuPreference || 'sin elegir'})`)
+      .join(", ");
+
+    const listaNinos = formData.childGuests
+      .filter(k => k.name.trim())
+      .map(k => k.name)
+      .join(", ");
+
+    const menuPrincipal = formData.notAttending ? '' : formData.mainGuestMenu || 'sin elegir';
 
     const payload = {
       nombreCompleto: formData.fullNames.trim(),
@@ -194,7 +262,9 @@ export const RSVPForm: React.FC = () => {
       eventos: eventosSeleccionados,
       adultos: formData.notAttending ? 0 : formData.adultCount,
       ninos: formData.notAttending ? 0 : formData.childCount,
+      menuPrincipal: menuPrincipal,
       acompanantes: listaAcompanantes,
+      ninosNombres: listaNinos,
       alergias: formData.dietaryRestrictions.trim()
     };
 
@@ -298,6 +368,20 @@ export const RSVPForm: React.FC = () => {
         </div>
 
         <div id="rsvp-card" className="bg-white rounded-2xl md:rounded-3xl shadow-2xl overflow-hidden min-h-125 flex flex-col">
+
+          {/* Honeypot anti-bot field (hidden from users) */}
+          <div className="hidden">
+            <label>
+              No rellenar
+              <input
+                type="text"
+                name="website"
+                value={botField}
+                onChange={(e) => setBotField(e.target.value)}
+                autoComplete="off"
+              />
+            </label>
+          </div>
 
           {/* Header del Formulario */}
           <div className="p-8 pb-0">
@@ -477,21 +561,106 @@ export const RSVPForm: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Nombres de Acompañantes (DINÁMICO) */}
+                {/* Preferencia de menú del invitado principal */}
+                <div className="animate-fade-in bg-linear-to-br from-[#2F3E34]/5 to-wedding-50/30 p-5 rounded-xl border border-[#2F3E34]/10">
+                  <h3 className="text-emerald-900 font-bold text-base mb-4 flex items-center gap-2">
+                    <Utensils size={18} className="text-[#2F3E34]" /> Tu menú principal
+                  </h3>
+                  <div className="bg-white rounded-lg p-3 mb-3 border border-gray-200">
+                    <p className="text-sm font-medium text-emerald-900 mb-2">{formData.fullNames || 'Tu nombre'}</p>
+                    <div className="flex gap-3">
+                      <button
+                        type="button"
+                        onClick={() => updateField('mainGuestMenu', 'carne')}
+                        className={`flex-1 p-3 rounded-lg border-2 transition-all flex items-center justify-center gap-2 font-medium text-sm ${formData.mainGuestMenu === 'carne'
+                          ? 'border-[#2F3E34] bg-[#2F3E34] text-white shadow-md'
+                          : 'border-gray-200 bg-gray-50 text-gray-700 hover:border-[#2F3E34]/30'
+                          }`}
+                      >
+                        <Beef size={18} />
+                        Carne
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => updateField('mainGuestMenu', 'pescado')}
+                        className={`flex-1 p-3 rounded-lg border-2 transition-all flex items-center justify-center gap-2 font-medium text-sm ${formData.mainGuestMenu === 'pescado'
+                          ? 'border-[#2F3E34] bg-[#2F3E34] text-white shadow-md'
+                          : 'border-gray-200 bg-gray-50 text-gray-700 hover:border-[#2F3E34]/30'
+                          }`}
+                      >
+                        <Fish size={18} />
+                        Pescado
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Nombres y Menú de Acompañantes (DINÁMICO) */}
                 {companionsNeeded > 0 && (
-                  <div className="animate-fade-in bg-wedding-50/50 p-4 rounded-xl border border-wedding-100">
-                    <h3 className="text-emerald-900 font-bold text-sm mb-4 flex items-center gap-2 uppercase tracking-wide">
-                      <UserPlus size={16} className="text-wedding-500" /> Nombres de acompañantes
+                  <div className="animate-fade-in bg-linear-to-br from-[#2F3E34]/5 to-wedding-50/30 p-5 rounded-xl border border-[#2F3E34]/10">
+                    <h3 className="text-emerald-900 font-bold text-base mb-4 flex items-center gap-2">
+                      <UserPlus size={18} className="text-[#2F3E34]" /> Acompañantes
                     </h3>
-                    <div className="space-y-3">
-                      {formData.additionalGuests.map((name, index) => (
-                        <div key={index}>
+                    <div className="space-y-4">
+                      {formData.additionalGuests.map((guest, index) => (
+                        <div key={index} className="bg-white rounded-lg p-4 border border-gray-200 space-y-3">
                           <input
                             type="text"
-                            value={name}
-                            onChange={(e) => updateGuestName(index, e.target.value)}
+                            value={guest.name}
+                            onChange={(e) => updateGuestInfo(index, 'name', e.target.value)}
                             placeholder={`Nombre y Apellido del Acompañante ${index + 1}`}
-                            className="w-full p-3 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-wedding-100 focus:border-wedding-500 focus:outline-none transition-all text-sm"
+                            className="w-full p-3 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#2F3E34]/20 focus:border-[#2F3E34] focus:outline-none transition-all text-sm font-medium"
+                          />
+                          <div>
+                            <p className="text-xs text-gray-600 mb-2 font-medium uppercase tracking-wide">Menú preferido:</p>
+                            <div className="flex gap-2">
+                              <button
+                                type="button"
+                                onClick={() => updateGuestInfo(index, 'menuPreference', 'carne')}
+                                className={`flex-1 p-2.5 rounded-lg border-2 transition-all flex items-center justify-center gap-2 text-sm font-medium ${guest.menuPreference === 'carne'
+                                  ? 'border-[#2F3E34] bg-[#2F3E34] text-white shadow-md'
+                                  : 'border-gray-200 bg-gray-50 text-gray-700 hover:border-[#2F3E34]/30'
+                                  }`}
+                              >
+                                <Beef size={16} />
+                                Carne
+                              </button>
+                              <button
+                                type="button"
+                                onClick={() => updateGuestInfo(index, 'menuPreference', 'pescado')}
+                                className={`flex-1 p-2.5 rounded-lg border-2 transition-all flex items-center justify-center gap-2 text-sm font-medium ${guest.menuPreference === 'pescado'
+                                  ? 'border-[#2F3E34] bg-[#2F3E34] text-white shadow-md'
+                                  : 'border-gray-200 bg-gray-50 text-gray-700 hover:border-[#2F3E34]/30'
+                                  }`}
+                              >
+                                <Fish size={16} />
+                                Pescado
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                    {errors.guestNames && <p className="text-red-500 text-xs mt-2 ml-1">{errors.guestNames}</p>}
+                  </div>
+                )}
+
+                {/* Nombres de Niños (sin elección de menú) */}
+                {childrenNeeded > 0 && (
+                  <div className="animate-fade-in bg-linear-to-br from-blue-50/40 to-wedding-50/30 p-5 rounded-xl border border-blue-100/60">
+                    <h3 className="text-emerald-900 font-bold text-base mb-4 flex items-center gap-2">
+                      <Users size={18} className="text-blue-700" /> Niños (menú infantil ya incluido)
+                    </h3>
+                    <div className="space-y-3">
+                      {formData.childGuests.map((kid, index) => (
+                        <div key={index} className="bg-white rounded-lg p-3 border border-gray-200">
+                          <label className="text-xs font-semibold text-gray-600 block mb-1">Nombre del Niño {index + 1}</label>
+                          <input
+                            type="text"
+                            value={kid.name}
+                            onChange={(e) => updateChildName(index, e.target.value)}
+                            placeholder="Nombre y Apellido"
+                            className="w-full p-3 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-100 focus:border-blue-400 focus:outline-none transition-all text-sm font-medium"
                           />
                         </div>
                       ))}
@@ -501,17 +670,18 @@ export const RSVPForm: React.FC = () => {
                 )}
 
                 {/* Alergias */}
-                <div>
-                  <h3 className="text-emerald-900 font-bold text-lg mb-4 flex items-center gap-2">
-                    <AlertCircle size={20} className="text-wedding-500" /> Alergias o Dietas
+                <div className="bg-linear-to-br from-orange-50/50 to-red-50/30 p-5 rounded-xl border border-orange-200/50">
+                  <h3 className="text-emerald-900 font-bold text-base mb-3 flex items-center gap-2">
+                    <AlertCircle size={18} className="text-orange-600" /> Alergias o Restricciones
                   </h3>
                   <textarea
                     value={formData.dietaryRestrictions}
                     onChange={(e) => updateField('dietaryRestrictions', e.target.value)}
-                    placeholder="Ej. María es celíaca, Juan es vegetariano..."
+                    placeholder="Ej. María es celíaca, Juan es vegetariano, intolerancia a frutos secos..."
                     rows={3}
-                    className="w-full p-4 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-wedding-100 focus:border-wedding-500 focus:outline-none resize-none"
+                    className="w-full p-4 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-orange-100 focus:border-orange-400 focus:outline-none resize-none text-sm"
                   ></textarea>
+                  <p className="text-xs text-gray-600 mt-2 italic">Por favor, especifica cualquier alergia o restricción alimentaria importante.</p>
                 </div>
               </div>
             )}
@@ -535,17 +705,46 @@ export const RSVPForm: React.FC = () => {
                         <span className="font-bold text-emerald-900">{formData.fullNames}</span>
                       </div>
 
-                      {/* Mostrar nombres de acompañantes en el resumen */}
+                      {/* Menú principal */}
+                      <div className="flex justify-between border-b border-wedding-200 pb-2">
+                        <span className="text-gray-600">Tu Menú</span>
+                        <span className="font-bold text-emerald-900 flex items-center gap-1">
+                          {formData.mainGuestMenu === 'carne' && <><Beef size={16} /> Carne</>}
+                          {formData.mainGuestMenu === 'pescado' && <><Fish size={16} /> Pescado</>}
+                          {!formData.mainGuestMenu && <span className="text-gray-400">Sin elegir</span>}
+                        </span>
+                      </div>
+
+                      {/* Mostrar nombres y menú de acompañantes */}
                       {formData.additionalGuests.length > 0 && (
                         <div className="text-left border-b border-wedding-200 pb-2">
-                          <span className="text-gray-600 block mb-1">Acompañantes:</span>
-                          <ul className="list-disc list-inside">
+                          <span className="text-gray-600 block mb-2">Acompañantes:</span>
+                          <div className="space-y-1.5">
                             {formData.additionalGuests.map((guest, idx) => (
-                              <li key={idx} className="text-emerald-900 font-medium text-sm ml-2">
-                                {guest}
-                              </li>
+                              <div key={idx} className="flex items-center justify-between bg-gray-50 px-3 py-2 rounded-lg">
+                                <span className="text-emerald-900 font-medium text-sm">{guest.name}</span>
+                                <span className="text-xs font-semibold text-gray-600 flex items-center gap-1">
+                                  {guest.menuPreference === 'carne' && <><Beef size={14} /> Carne</>}
+                                  {guest.menuPreference === 'pescado' && <><Fish size={14} /> Pescado</>}
+                                  {!guest.menuPreference && <span className="text-gray-400">Sin elegir</span>}
+                                </span>
+                              </div>
                             ))}
-                          </ul>
+                          </div>
+                        </div>
+                      )}
+
+                      {formData.childGuests.length > 0 && (
+                        <div className="text-left border-b border-wedding-200 pb-2">
+                          <span className="text-gray-600 block mb-2">Niños:</span>
+                          <div className="space-y-1.5">
+                            {formData.childGuests.map((kid, idx) => (
+                              <div key={idx} className="flex items-center justify-between bg-gray-50 px-3 py-2 rounded-lg">
+                                <span className="text-emerald-900 font-medium text-sm">{kid.name}</span>
+                                <span className="text-xs font-semibold text-gray-500">Menú infantil</span>
+                              </div>
+                            ))}
+                          </div>
                         </div>
                       )}
 
