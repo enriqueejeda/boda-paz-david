@@ -291,20 +291,20 @@ export const RSVPForm: React.FC = () => {
         <div key={s.id} className="flex flex-col items-center relative z-10 w-1/4">
           <div
             className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold border-2 transition-all duration-500 ${currentStep >= s.id
-              ? 'bg-wedding-500 border-wedding-500 text-white shadow-lg scale-110'
+              ? 'bg-emerald-600 border-emerald-600 text-white shadow-lg scale-110'
               : 'bg-white border-gray-300 text-gray-600'
               }`}
           >
             {currentStep > s.id ? <CheckCircle size={16} /> : s.id}
           </div>
-          <span className={`text-xs mt-2 font-medium uppercase tracking-wider transition-colors ${currentStep >= s.id ? 'text-wedding-700' : 'text-gray-600'}`}>
+          <span className={`text-xs mt-2 font-medium uppercase tracking-wider transition-colors ${currentStep >= s.id ? 'text-emerald-800' : 'text-gray-600'}`}>
             {s.title}
           </span>
           {/* Línea conectora */}
           {idx < STEPS.length - 1 && (
             <div className="absolute top-4 left-1/2 w-full h-0.5 -z-10 bg-gray-100">
               <div
-                className="h-full bg-wedding-500 transition-all duration-500"
+                className="h-full bg-emerald-600 transition-all duration-500"
                 style={{ width: currentStep > s.id ? '100%' : '0%' }}
               />
             </div>
@@ -317,8 +317,8 @@ export const RSVPForm: React.FC = () => {
   // VISTA DE ÉXITO
   if (status === 'success') {
     return (
-      <div className="py-24 bg-wedding-50 flex items-center justify-center px-4" id="rsvp-success">
-        <div className="bg-white rounded-3xl p-10 md:p-14 text-center shadow-2xl border border-wedding-100 max-w-lg w-full animate-fade-in-up">
+      <div className="py-24 bg-emerald-50 flex items-center justify-center px-4" id="rsvp-success">
+        <div className="bg-white rounded-3xl p-10 md:p-14 text-center shadow-2xl border border-emerald-100 max-w-lg w-full animate-fade-in-up">
           <div className="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6 shadow-inner">
             <CheckCircle className="w-12 h-12 text-green-600" />
           </div>
@@ -326,11 +326,11 @@ export const RSVPForm: React.FC = () => {
           <p className="text-emerald-800 text-lg mb-8 leading-relaxed">
             {formData.notAttending
               ? "Sentiremos no verte, pero gracias por avisarnos."
-              : "¡Qué alegría! Ya contamos contigo para el gran día. Hemos guardado tus preferencias."}
+              : "Gracias por formar parte de este día tan importante para nosotros. ¡Nos vemos pronto!"}
           </p>
           <button
             onClick={() => window.location.reload()}
-            className="text-wedding-600 font-semibold hover:text-wedding-800 underline decoration-2 underline-offset-4"
+            className="text-emerald-700 font-semibold hover:text-emerald-900 underline decoration-2 underline-offset-4"
           >
             Volver al inicio
           </button>
@@ -353,7 +353,7 @@ export const RSVPForm: React.FC = () => {
     <div className="py-20 md:py-28 bg-[#2F3E34] relative overflow-hidden">
       {/* Background Decor */}
       <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
-        <div className="absolute top-20 right-20 w-64 h-64 bg-wedding-400 rounded-full blur-3xl"></div>
+        <div className="absolute top-20 right-20 w-64 h-64 bg-emerald-300 rounded-full blur-3xl"></div>
         <div className="absolute bottom-20 left-20 w-80 h-80 bg-emerald-400 rounded-full blur-3xl"></div>
       </div>
 
@@ -407,7 +407,7 @@ export const RSVPForm: React.FC = () => {
                       value={formData.fullNames}
                       onChange={(e) => updateField('fullNames', e.target.value)}
                       placeholder="Nombre y Apellidos"
-                      className={`w-full pl-12 pr-4 py-4 bg-gray-50 border rounded-xl focus:ring-2 focus:outline-none transition-all ${errors.fullNames ? 'border-red-300 ring-red-100' : 'border-gray-200 focus:border-wedding-500 focus:ring-wedding-100'}`}
+                      className={`w-full pl-12 pr-4 py-4 bg-gray-50 border rounded-xl focus:ring-2 focus:outline-none transition-all ${errors.fullNames ? 'border-red-300 ring-red-100' : 'border-gray-200 focus:border-emerald-500 focus:ring-emerald-100'}`}
                     />
                   </div>
                   {errors.fullNames && <p className="text-red-500 text-sm ml-2">{errors.fullNames}</p>}
@@ -422,7 +422,7 @@ export const RSVPForm: React.FC = () => {
                       value={formData.emailTelefono}
                       onChange={(e) => updateField('emailTelefono', e.target.value)}
                       placeholder="Para enviarte detalles..."
-                      className={`w-full pl-12 pr-4 py-4 bg-gray-50 border rounded-xl focus:ring-2 focus:outline-none transition-all ${errors.emailTelefono ? 'border-red-300 ring-red-100' : 'border-gray-200 focus:border-wedding-500 focus:ring-wedding-100'}`}
+                      className={`w-full pl-12 pr-4 py-4 bg-gray-50 border rounded-xl focus:ring-2 focus:outline-none transition-all ${errors.emailTelefono ? 'border-red-300 ring-red-100' : 'border-gray-200 focus:border-emerald-500 focus:ring-emerald-100'}`}
                     />
                   </div>
                   {errors.emailTelefono && <p className="text-red-500 text-sm ml-2">{errors.emailTelefono}</p>}
@@ -442,55 +442,55 @@ export const RSVPForm: React.FC = () => {
                   {/* Option: Boda (Day 2) */}
                   <div
                     onClick={() => toggleEvent('attendingDay2')}
-                    className={`cursor-pointer p-4 rounded-xl border-2 transition-all duration-300 flex items-center gap-4 group ${formData.attendingDay2 ? 'border-wedding-500 bg-wedding-50' : 'border-gray-100 hover:border-wedding-200'}`}
+                    className={`cursor-pointer p-4 rounded-xl border-2 transition-all duration-300 flex items-center gap-4 group ${formData.attendingDay2 ? 'border-emerald-600 bg-emerald-50' : 'border-gray-100 hover:border-emerald-200'}`}
                   >
-                    <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-colors ${formData.attendingDay2 ? 'bg-wedding-500 border-wedding-500' : 'border-gray-300'}`}>
+                    <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-colors ${formData.attendingDay2 ? 'bg-emerald-600 border-emerald-600' : 'border-gray-300'}`}>
                       {formData.attendingDay2 && <CheckCircle size={14} className="text-white" />}
                     </div>
                     <div className="flex-1">
                       <div className="flex justify-between items-center mb-1">
-                        <span className={`font-bold ${formData.attendingDay2 ? 'text-emerald-900' : 'text-gray-700'}`}>EL GRAN DÍA</span>
+                        <span className={`font-bold ${formData.attendingDay2 ? 'text-emerald-900' : 'text-gray-700'}`}>La boda</span>
                         <span className="text-xs font-semibold bg-white px-2 py-1 rounded border shadow-sm text-gray-700">1 AGO</span>
                       </div>
                       <p className="text-sm text-gray-700">Ceremonia & Fiesta. Lo más importante.</p>
                     </div>
-                    <PartyPopper className={`w-6 h-6 ${formData.attendingDay2 ? 'text-wedding-500' : 'text-gray-300'}`} />
+                    <PartyPopper className={`w-6 h-6 ${formData.attendingDay2 ? 'text-emerald-600' : 'text-gray-300'}`} />
                   </div>
 
                   {/* Option: Pre-boda (Day 1) */}
                   <div
                     onClick={() => toggleEvent('attendingDay1')}
-                    className={`cursor-pointer p-4 rounded-xl border-2 transition-all duration-300 flex items-center gap-4 group ${formData.attendingDay1 ? 'border-wedding-500 bg-wedding-50' : 'border-gray-100 hover:border-wedding-200'}`}
+                    className={`cursor-pointer p-4 rounded-xl border-2 transition-all duration-300 flex items-center gap-4 group ${formData.attendingDay1 ? 'border-emerald-600 bg-emerald-50' : 'border-gray-100 hover:border-emerald-200'}`}
                   >
-                    <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-colors ${formData.attendingDay1 ? 'bg-wedding-500 border-wedding-500' : 'border-gray-300'}`}>
+                    <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-colors ${formData.attendingDay1 ? 'bg-emerald-600 border-emerald-600' : 'border-gray-300'}`}>
                       {formData.attendingDay1 && <CheckCircle size={14} className="text-white" />}
                     </div>
                     <div className="flex-1">
                       <div className="flex justify-between items-center mb-1">
-                        <span className={`font-bold ${formData.attendingDay1 ? 'text-emerald-900' : 'text-gray-700'}`}>BIENVENIDA</span>
+                        <span className={`font-bold ${formData.attendingDay1 ? 'text-emerald-900' : 'text-gray-700'}`}>Pre-boda</span>
                         <span className="text-xs font-semibold bg-white px-2 py-1 rounded border shadow-sm text-gray-700">31 JUL</span>
                       </div>
-                      <p className="text-sm text-gray-700">Cena informal y cóctel para romper el hielo.</p>
+                      <p className="text-sm text-gray-700">Cena informal</p>
                     </div>
-                    <Moon className={`w-6 h-6 ${formData.attendingDay1 ? 'text-wedding-500' : 'text-gray-300'}`} />
+                    <Moon className={`w-6 h-6 ${formData.attendingDay1 ? 'text-emerald-600' : 'text-gray-300'}`} />
                   </div>
 
                   {/* Option: Post-boda (Day 3) */}
                   <div
                     onClick={() => toggleEvent('attendingDay3')}
-                    className={`cursor-pointer p-4 rounded-xl border-2 transition-all duration-300 flex items-center gap-4 group ${formData.attendingDay3 ? 'border-wedding-500 bg-wedding-50' : 'border-gray-100 hover:border-wedding-200'}`}
+                    className={`cursor-pointer p-4 rounded-xl border-2 transition-all duration-300 flex items-center gap-4 group ${formData.attendingDay3 ? 'border-emerald-600 bg-emerald-50' : 'border-gray-100 hover:border-emerald-200'}`}
                   >
-                    <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-colors ${formData.attendingDay3 ? 'bg-wedding-500 border-wedding-500' : 'border-gray-300'}`}>
+                    <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-colors ${formData.attendingDay3 ? 'bg-emerald-600 border-emerald-600' : 'border-gray-300'}`}>
                       {formData.attendingDay3 && <CheckCircle size={14} className="text-white" />}
                     </div>
                     <div className="flex-1">
                       <div className="flex justify-between items-center mb-1">
-                        <span className={`font-bold ${formData.attendingDay3 ? 'text-emerald-900' : 'text-gray-700'}`}>DESPEDIDA</span>
+                        <span className={`font-bold ${formData.attendingDay3 ? 'text-emerald-900' : 'text-gray-700'}`}>Post-boda</span>
                         <span className="text-xs font-semibold bg-white px-2 py-1 rounded border shadow-sm text-gray-700">2 AGO</span>
                       </div>
-                      <p className="text-sm text-gray-700">Brunch y piscina antes de volver.</p>
+                      <p className="text-sm text-gray-700">Comida y risas para despedirnos a lo grande.</p>
                     </div>
-                    <Utensils className={`w-6 h-6 ${formData.attendingDay3 ? 'text-wedding-500' : 'text-gray-300'}`} />
+                    <Utensils className={`w-6 h-6 ${formData.attendingDay3 ? 'text-emerald-600' : 'text-gray-300'}`} />
                   </div>
                 </div>
 
@@ -514,24 +514,23 @@ export const RSVPForm: React.FC = () => {
                 {/* Contadores */}
                 <div>
                   <h3 className="text-emerald-900 font-bold text-lg mb-6 flex items-center gap-2">
-                    <Users size={20} className="text-wedding-500" /> ¿Cuántos venís?
+                    <Users size={20} className="text-emerald-600" /> ¿Cuántos venís?
                   </h3>
                   <div className="flex items-center justify-between p-4 bg-gray-50 rounded-xl mb-4">
                     <div>
                       <span className="block font-bold text-gray-800">Adultos</span>
-                      <span className="text-xs text-gray-700">Mayores de 12 años</span>
                     </div>
                     <div className="flex items-center gap-4 bg-white px-2 py-1 rounded-lg shadow-sm">
                       <button
                         onClick={() => handleGuestCount('adult', 'sub')}
-                        className="w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-emerald-900 font-bold transition-colors"
+                        className="w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-black font-bold transition-colors"
                       >
                         -
                       </button>
                       <span className="w-4 text-center font-bold text-lg">{formData.adultCount}</span>
                       <button
                         onClick={() => handleGuestCount('adult', 'add')}
-                        className="w-8 h-8 rounded-full bg-wedding-500 hover:bg-wedding-600 flex items-center justify-center text-white font-bold transition-colors"
+                        className="w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-black font-bold transition-colors"
                       >
                         +
                       </button>
@@ -541,19 +540,18 @@ export const RSVPForm: React.FC = () => {
                   <div className="flex items-center justify-between p-4 bg-gray-50 rounded-xl">
                     <div>
                       <span className="block font-bold text-gray-800">Niños</span>
-                      <span className="text-xs text-gray-700">Menores de 12 años</span>
                     </div>
                     <div className="flex items-center gap-4 bg-white px-2 py-1 rounded-lg shadow-sm">
                       <button
                         onClick={() => handleGuestCount('child', 'sub')}
-                        className="w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-emerald-900 font-bold transition-colors"
+                        className="w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-black font-bold transition-colors"
                       >
                         -
                       </button>
                       <span className="w-4 text-center font-bold text-lg">{formData.childCount}</span>
                       <button
                         onClick={() => handleGuestCount('child', 'add')}
-                        className="w-8 h-8 rounded-full bg-wedding-500 hover:bg-wedding-600 flex items-center justify-center text-white font-bold transition-colors"
+                        className="w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-black font-bold transition-colors"
                       >
                         +
                       </button>
@@ -562,7 +560,7 @@ export const RSVPForm: React.FC = () => {
                 </div>
 
                 {/* Preferencia de menú del invitado principal */}
-                <div className="animate-fade-in bg-linear-to-br from-[#2F3E34]/5 to-wedding-50/30 p-5 rounded-xl border border-[#2F3E34]/10">
+                <div className="animate-fade-in bg-linear-to-br from-[#2F3E34]/5 to-emerald-50/30 p-5 rounded-xl border border-[#2F3E34]/10">
                   <h3 className="text-emerald-900 font-bold text-base mb-4 flex items-center gap-2">
                     <Utensils size={18} className="text-[#2F3E34]" /> Tu menú principal
                   </h3>
@@ -597,7 +595,7 @@ export const RSVPForm: React.FC = () => {
 
                 {/* Nombres y Menú de Acompañantes (DINÁMICO) */}
                 {companionsNeeded > 0 && (
-                  <div className="animate-fade-in bg-linear-to-br from-[#2F3E34]/5 to-wedding-50/30 p-5 rounded-xl border border-[#2F3E34]/10">
+                  <div className="animate-fade-in bg-linear-to-br from-[#2F3E34]/5 to-emerald-50/30 p-5 rounded-xl border border-[#2F3E34]/10">
                     <h3 className="text-emerald-900 font-bold text-base mb-4 flex items-center gap-2">
                       <UserPlus size={18} className="text-[#2F3E34]" /> Acompañantes
                     </h3>
@@ -647,20 +645,20 @@ export const RSVPForm: React.FC = () => {
 
                 {/* Nombres de Niños (sin elección de menú) */}
                 {childrenNeeded > 0 && (
-                  <div className="animate-fade-in bg-linear-to-br from-blue-50/40 to-wedding-50/30 p-5 rounded-xl border border-blue-100/60">
+                  <div className="animate-fade-in bg-linear-to-br from-[#F3EFE8]/70 to-emerald-50/40 p-5 rounded-xl border border-emerald-100">
                     <h3 className="text-emerald-900 font-bold text-base mb-4 flex items-center gap-2">
-                      <Users size={18} className="text-blue-700" /> Niños (menú infantil ya incluido)
+                      <Users size={18} className="text-emerald-800" /> Niños (menú infantil ya incluido)
                     </h3>
                     <div className="space-y-3">
                       {formData.childGuests.map((kid, index) => (
                         <div key={index} className="bg-white rounded-lg p-3 border border-gray-200">
-                          <label className="text-xs font-semibold text-gray-600 block mb-1">Nombre del Niño {index + 1}</label>
+                          <label className="text-xs font-semibold text-gray-700 block mb-1">Nombre del Niño {index + 1}</label>
                           <input
                             type="text"
                             value={kid.name}
                             onChange={(e) => updateChildName(index, e.target.value)}
                             placeholder="Nombre y Apellido"
-                            className="w-full p-3 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-100 focus:border-blue-400 focus:outline-none transition-all text-sm font-medium"
+                            className="w-full p-3 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-emerald-100 focus:border-emerald-500 focus:outline-none transition-all text-sm font-medium"
                           />
                         </div>
                       ))}
@@ -699,14 +697,14 @@ export const RSVPForm: React.FC = () => {
                   </div>
                 ) : (
                   <div className="space-y-4">
-                    <div className="bg-wedding-50 p-6 rounded-xl border border-wedding-100 space-y-3">
-                      <div className="flex justify-between border-b border-wedding-200 pb-2">
+                    <div className="bg-emerald-50 p-6 rounded-xl border border-emerald-100 space-y-3">
+                      <div className="flex justify-between border-b border-emerald-200 pb-2">
                         <span className="text-gray-600">Nombre Principal</span>
                         <span className="font-bold text-emerald-900">{formData.fullNames}</span>
                       </div>
 
                       {/* Menú principal */}
-                      <div className="flex justify-between border-b border-wedding-200 pb-2">
+                      <div className="flex justify-between border-b border-emerald-200 pb-2">
                         <span className="text-gray-600">Tu Menú</span>
                         <span className="font-bold text-emerald-900 flex items-center gap-1">
                           {formData.mainGuestMenu === 'carne' && <><Beef size={16} /> Carne</>}
@@ -717,7 +715,7 @@ export const RSVPForm: React.FC = () => {
 
                       {/* Mostrar nombres y menú de acompañantes */}
                       {formData.additionalGuests.length > 0 && (
-                        <div className="text-left border-b border-wedding-200 pb-2">
+                        <div className="text-left border-b border-emerald-200 pb-2">
                           <span className="text-gray-600 block mb-2">Acompañantes:</span>
                           <div className="space-y-1.5">
                             {formData.additionalGuests.map((guest, idx) => (
@@ -735,7 +733,7 @@ export const RSVPForm: React.FC = () => {
                       )}
 
                       {formData.childGuests.length > 0 && (
-                        <div className="text-left border-b border-wedding-200 pb-2">
+                        <div className="text-left border-b border-emerald-200 pb-2">
                           <span className="text-gray-600 block mb-2">Niños:</span>
                           <div className="space-y-1.5">
                             {formData.childGuests.map((kid, idx) => (
@@ -748,16 +746,16 @@ export const RSVPForm: React.FC = () => {
                         </div>
                       )}
 
-                      <div className="flex justify-between border-b border-wedding-200 pb-2">
+                      <div className="flex justify-between border-b border-emerald-200 pb-2">
                         <span className="text-gray-600">Total Invitados</span>
                         <span className="font-bold text-emerald-900">{formData.adultCount + formData.childCount} personas</span>
                       </div>
                       <div className="text-left">
                         <span className="text-gray-600 block mb-2">Eventos seleccionados:</span>
                         <div className="flex flex-wrap gap-2">
-                          {formData.attendingDay1 && <span className="bg-white px-3 py-1 rounded-full text-xs font-bold shadow-sm text-wedding-600">31 Jul</span>}
-                          {formData.attendingDay2 && <span className="bg-white px-3 py-1 rounded-full text-xs font-bold shadow-sm text-wedding-600">1 Ago</span>}
-                          {formData.attendingDay3 && <span className="bg-white px-3 py-1 rounded-full text-xs font-bold shadow-sm text-wedding-600">2 Ago</span>}
+                          {formData.attendingDay1 && <span className="bg-white px-3 py-1 rounded-full text-xs font-bold shadow-sm text-emerald-700">31 Jul</span>}
+                          {formData.attendingDay2 && <span className="bg-white px-3 py-1 rounded-full text-xs font-bold shadow-sm text-emerald-700">1 Ago</span>}
+                          {formData.attendingDay3 && <span className="bg-white px-3 py-1 rounded-full text-xs font-bold shadow-sm text-emerald-700">2 Ago</span>}
                         </div>
                       </div>
                       {formData.dietaryRestrictions && (
@@ -799,7 +797,7 @@ export const RSVPForm: React.FC = () => {
               <button
                 onClick={handleSubmit}
                 disabled={status === 'submitting'}
-                className={`bg-wedding-500 hover:bg-wedding-600 text-white px-10 py-3 rounded-full font-bold shadow-lg hover:shadow-xl transition-all flex items-center gap-2 transform hover:-translate-y-0.5 ${status === 'submitting' ? 'opacity-70 cursor-wait' : ''}`}
+                className={`bg-emerald-500 hover:bg-emerald-600 text-white px-10 py-3 rounded-full font-bold shadow-lg hover:shadow-xl transition-all flex items-center gap-2 transform hover:-translate-y-0.5 ${status === 'submitting' ? 'opacity-70 cursor-wait' : ''}`}
               >
                 {status === 'submitting' ? 'Enviando...' : 'Confirmar Todo'} <Send size={18} />
               </button>
