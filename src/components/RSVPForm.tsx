@@ -2,7 +2,8 @@ import React, { useState, useEffect, useCallback } from 'react';
 import {
   Send, CheckCircle, AlertCircle, AlertTriangle,
   User, Mail, ChevronRight, ChevronLeft,
-  Utensils, Users, X, PartyPopper, Moon, UserPlus
+  Utensils, Users, X, PartyPopper, Moon, UserPlus,
+  Info
 } from 'lucide-react';
 
 // --- CONFIGURACIÓN ---
@@ -289,7 +290,11 @@ export const RSVPForm: React.FC = () => {
       <div className="container mx-auto px-4 relative z-10 max-w-2xl">
         <div className="text-center mb-10 text-white">
           <h2 className="text-4xl md:text-5xl font-serif mb-3 font-bold">Reserva tu Lugar</h2>
-          <p className="text-emerald-100/80 text-lg">Por favor, confirma antes del 1 de Junio.</p>
+          <p className="text-emerald-100/80 text-lg">Confirmanos tu asistencia antes del 1 de junio para poder organizarnos, todo con cariño.</p>
+          <p className="text-emerald-400 mt-2">
+            <Info size={20} className="inline-block mr-2" />
+            Si tienes cualquier duda, llamanos sin porblema
+          </p>
         </div>
 
         <div id="rsvp-card" className="bg-white rounded-2xl md:rounded-3xl shadow-2xl overflow-hidden min-h-125 flex flex-col">

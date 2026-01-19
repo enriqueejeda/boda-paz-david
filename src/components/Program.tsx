@@ -172,7 +172,7 @@ export const Program: React.FC = () => {
                   </div>
 
                   {/* Content */}
-                  <div className="grow pl-14 md:pl-0 -mt-8 md:mt-0">
+                  <div className="grow pl-14 md:pl-0 -mt-8 md:mt-2">
                     <h3 className="text-2xl font-serif text-emerald-900 font-bold mb-2">
                       {event.title}
                     </h3>
@@ -215,7 +215,7 @@ export const Program: React.FC = () => {
               "Estamos contando los días para compartir esta locura con vosotros."
             </p>
             <p className="font-bold text-wedding-600 uppercase tracking-widest text-sm">
-              — Con amor, David & Paz
+              — Con amor, Paz & David —
             </p>
           </div>
         </div>
