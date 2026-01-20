@@ -3,7 +3,7 @@ import { Music, PlusCircle, Search, ExternalLink, Smartphone } from 'lucide-reac
 
 export const MusicRequest: React.FC = () => {
   // REEMPLAZAR CON TU ENLACE REAL DE SPOTIFY JAM O PLAYLIST COLABORATIVA
-  const SPOTIFY_JAM_URL = "https://open.spotify.com/playlist/3mLKC8tYZsMApkSFgDVHxO?si=37672c7c95e544b6&pt=0021dccb7e0ac34e939e77aeefd87d54";
+  const SPOTIFY_JAM_URL = "https://open.spotify.com/playlist/3mLKC8tYZsMApkSFgDVHxO?si=9iI6-0fFRHehW8EAK5hEBA";
 
   const steps = [
     {
