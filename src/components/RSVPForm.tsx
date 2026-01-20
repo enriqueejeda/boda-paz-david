@@ -71,6 +71,18 @@ export const RSVPForm: React.FC = () => {
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [botField, setBotField] = useState('');
 
+  // Scroll a la confirmación cuando se envía con éxito
+  useEffect(() => {
+    if (status === 'success') {
+      setTimeout(() => {
+        const successElement = document.getElementById('rsvp-success');
+        if (successElement) {
+          successElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }, 100);
+    }
+  }, [status]);
+
   // Solo pedimos menú/nombre para acompañantes adultos; los niños tienen menú propio
   const companionsNeeded = Math.max(0, formData.adultCount - 1);
   const childrenNeeded = Math.max(0, formData.childCount);
