@@ -181,6 +181,26 @@ export const RSVPForm: React.FC = () => {
       if (!formData.emailTelefono.trim()) {
         newErrors.emailTelefono = "Necesitamos un contacto para confirmarte.";
         isValid = false;
+      } else {
+        const contacto = formData.emailTelefono.trim();
+        // Detectar si es un número de teléfono (contiene principalmente dígitos)
+        const esNumero = /^[\d\s\+\-\(\)]+$/.test(contacto);
+
+        if (esNumero) {
+          // Extraer solo los dígitos
+          const digitos = contacto.replace(/\D/g, '');
+          if (digitos.length < 9) {
+            newErrors.emailTelefono = "El teléfono debe tener al menos 9 dígitos.";
+            isValid = false;
+          }
+        } else {
+          // Validar email básico
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!emailRegex.test(contacto)) {
+            newErrors.emailTelefono = "Por favor, introduce un email válido o un teléfono correcto.";
+            isValid = false;
+          }
+        }
       }
     }
 
